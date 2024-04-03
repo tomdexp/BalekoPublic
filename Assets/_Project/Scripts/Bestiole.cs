@@ -11,6 +11,7 @@ public class Bestiole : MonoBehaviour
     public UI_BarValue HealthBar;
     public UI_BarValue HungerBar;
     public SpriteRenderer SpriteRenderer;
+    public Transform BulletSpawnPoint;
 
     public void Awake()
     {
