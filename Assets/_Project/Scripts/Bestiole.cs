@@ -5,6 +5,7 @@ using DG.Tweening;
 
 public class Bestiole : MonoBehaviour
 {
+    public Genome Genome;
     public Damageable Damageable;
     public Damageable Hungerable;
     public SpriteRenderer SpriteRenderer;
