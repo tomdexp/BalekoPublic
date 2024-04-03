@@ -67,12 +67,10 @@ public class Vision : MonoBehaviour
     {
         if (collision.TryGetComponent<Collectable>(out Collectable collectable))
         {
-            Debug.Log("SpottedColectable");
             OnCollectableSpoted?.Invoke(collision.gameObject);
         }
         if (collision.TryGetComponent<Bestiole>(out Bestiole bestiole))
         {
-            Debug.Log("SpottedEnnemy");
             OnEnemySpoted?.Invoke(collision.gameObject);
         }
     }
