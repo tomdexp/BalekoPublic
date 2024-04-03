@@ -11,11 +11,12 @@ public class Collectable : MonoBehaviour
         Bestiole bestiole = other.GetComponentInParent<Bestiole>();
         if (bestiole != null)
         {
-            bestiole.Hungerable.Damage(-10);
+            bestiole.Hungerable.Substract(-10);
             _spriteRenderer.transform.DOScale(0.75f, .1f).OnComplete(() =>
             {
                 _spriteRenderer.transform.DOScale(0.5f, .1f).OnComplete(() =>
                 {
+                    transform.DOKill();
                     Destroy(gameObject);
                 });
             });

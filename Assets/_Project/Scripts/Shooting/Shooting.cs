@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
     public Bestiole Bestiole;
-    public Bullet BulletPrefab;
+    public ProjectileSettings ProjectileSettings;
 
     private float timer;
     private void Update()
@@ -20,8 +18,13 @@ public class Shooting : MonoBehaviour
     public void Shoot()
     {
         timer = 0;
-        Bullet bullet = Instantiate(BulletPrefab);
+        var bulletFlyweight = FlyweightFactory.Spawn(ProjectileSettings);
+        var bullet = bulletFlyweight.GetComponent<Bullet>();
         bullet.transform.position = Bestiole.BulletSpawnPoint.position;
-        bullet.SetupBullet(10, 10, new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized, Bestiole);
+        Vector2 direction = Bestiole.BulletSpawnPoint.position - Bestiole.transform.position;
+        var damage = ProjectileSettings.DefaultDamage; // TODO : GeneProjectileDamage
+        var speed = ProjectileSettings.DefaultSpeed + Bestiole.Genome.GetGene<GeneProjectileSpeed>().Value * ProjectileSettings.DefaultSpeed;
+        var size = ProjectileSettings.DefaultSize + Bestiole.Genome.GetGene<GeneProjectileSize>().Value * ProjectileSettings.DefaultSize;
+        bullet.SetupBullet(damage, speed, size, direction.normalized, Bestiole);
     }
 }

@@ -453,6 +453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eafcc8c9ecc06146974cb76f02fb55f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Settings: {fileID: 0}
   Damageable: {fileID: 1241160710046056093}
   Hungerable: {fileID: 5785861268402039529}
   HealthBar: {fileID: 2399582177377736468}
@@ -461,6 +462,7 @@ MonoBehaviour:
   BulletSpawnPoint: {fileID: 7187484686685766232}
   lifeTime: 0
   killNumber: 0
+  CollectablePrefab: {fileID: 9030775092286064308, guid: 0ab8f61b683d7ce42b1b27f4223f6649, type: 3}
 --- !u!114 &1915912930399120479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -491,7 +493,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77425f26423d77c468c1535bb7f812d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnReduceValue:
+  OnSubstractValue:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAddValue:
     m_PersistentCalls:
       m_Calls: []
   OnZeroValue:
@@ -511,7 +516,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77425f26423d77c468c1535bb7f812d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnReduceValue:
+  OnSubstractValue:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAddValue:
     m_PersistentCalls:
       m_Calls: []
   OnZeroValue:
@@ -532,7 +540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bestiole: {fileID: 4408224179290954141}
-  BulletPrefab: {fileID: 9088293945593838749, guid: 04fe214fd8c931e48bb17e808ced49a7, type: 3}
+  ProjectileSettings: {fileID: 11400000, guid: 35bcad9ee2704704c94b2ac9343d6b8b, type: 2}
 --- !u!114 &289868908695958191
 MonoBehaviour:
   m_ObjectHideFlags: 0

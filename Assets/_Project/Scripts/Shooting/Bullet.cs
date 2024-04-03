@@ -3,8 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class Bullet : MonoBehaviour
+public class Bullet : Flyweight
 {
+    public new ProjectileSettings Settings
+    {
+        get => (ProjectileSettings)base.Settings;
+        set => base.Settings = value;
+    }
+
     [SerializeField] private Rigidbody2D Rigidbody;
     [SerializeField] private SpriteRenderer _spriteRenderer;
     public Bestiole Sender;
@@ -12,10 +18,11 @@ public class Bullet : MonoBehaviour
     public float Speed;
     public Vector2 Direction;
 
-    public void SetupBullet(float damage, float speed, Vector2 direction, Bestiole sender)
+    public void SetupBullet(float damage, float speed, float size, Vector2 direction, Bestiole sender)
     {
         Damage = damage;
         Speed = speed;
+        transform.localScale = new Vector2(size, size);
         Direction = direction;
         Sender = sender;
     }
@@ -27,12 +34,12 @@ public class Bullet : MonoBehaviour
 
     public void DestroyBullet()
     {
-        _spriteRenderer.transform.DOScale(0.75f, .1f).OnComplete(() =>
+        _spriteRenderer.transform.DOScale(0.5f, .1f).OnComplete(() =>
         {
-            _spriteRenderer.transform.DOScale(0.5f, .1f).OnComplete(() =>
+            _spriteRenderer.transform.DOScale(0.3f, .1f).OnComplete(() =>
             {
                 transform.DOKill();
-                Destroy(gameObject);
+                FlyweightFactory.ReturnToPool(this);
             });
         });
     }
@@ -42,9 +49,10 @@ public class Bullet : MonoBehaviour
         Bestiole bestiole = collision.GetComponentInParent<Bestiole>();
         if (bestiole != null)
         {
-            bestiole.Damageable.Damage(Damage);
+            bestiole.Damageable.Substract(Damage);
             Sender.killNumber++;
-            DestroyBullet();
+            if (_spriteRenderer != null)
+                DestroyBullet();
         }
     }
 }

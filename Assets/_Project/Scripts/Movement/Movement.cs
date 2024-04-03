@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    public Bestiole Bestiole;
     public GameObject model;
     //ToReplaceLater
     public float Speed;
@@ -16,32 +17,30 @@ public class Movement : MonoBehaviour
     private float _noiseRandomizerY;
     private Vector3 _currentDirection;
     private Vector3 _currentAngleVec;
-    private Rigidbody2D rigidbody2D;
+    private Rigidbody2D _rigidbody2D;
     private Storm _storm;
 
-    // Start is called before the first frame update
     void Start()
     {
-        rigidbody2D = GetComponent<Rigidbody2D>();
+        _rigidbody2D = GetComponent<Rigidbody2D>();
         _noiseRandomizerX = Random.Range(-100000, 100000);
         _noiseRandomizerY = Random.Range(-100000, 100000);
         _storm = GameObject.FindFirstObjectByType<Storm>();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         _currentDirection = Vector3.zero;
         NoiseInfluence();
         StormInfluence();
+        //if (Bestiole.Hungerable.CurrentValue / Bestiole.Hungerable.MaxValue > 0.2f)
         EnemyInfluence();
-
-        rigidbody2D.velocity = rigidbody2D.velocity * 0.999f * Time.fixedDeltaTime;
-        rigidbody2D.AddForce(_currentDirection);
+        _rigidbody2D.velocity = _rigidbody2D.velocity * 0.999f * Time.fixedDeltaTime;
+        _rigidbody2D.AddForce(_currentDirection);
 
         _currentAngleVec = model.transform.up;
         
-        model.transform.up = Vector3.Slerp(_currentAngleVec, rigidbody2D.velocity.normalized, RotateSpeed * Time.fixedDeltaTime);
+        model.transform.up = Vector3.Slerp(_currentAngleVec, _rigidbody2D.velocity.normalized, RotateSpeed * Time.fixedDeltaTime);
     }
 
     void NoiseInfluence()
