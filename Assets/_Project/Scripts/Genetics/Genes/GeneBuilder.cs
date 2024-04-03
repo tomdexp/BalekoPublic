@@ -50,6 +50,17 @@ public class GeneBuilder<T> where T : Gene, new()
         _gene.MutationChance = mutationChance;
         return this;
     }
+    
+    public GeneBuilder<T> WithSettings(GlobalGenesSettings.GeneSetting settings)
+    {
+        _gene.MinValue = settings.MinValue;
+        _gene.MaxValue = settings.MaxValue;
+        _gene.MutationRate = settings.MutationRate;
+        _gene.MinMutationRate = settings.MinMutationRate;
+        _gene.MaxMutationRate = settings.MaxMutationRate;
+        _gene.MutationChance = settings.MutationChance;
+        return this;
+    }
 
     public T Build()
     {

@@ -67,53 +67,96 @@ public class Genome
     
     private void HandleOpposingGenes()
     {
-        foreach (var opposingGene in OpposingGenes)
+        foreach (var (gene1, gene2) in OpposingGenes)
         {
-            var gene1 = opposingGene.Item1;
-            var gene2 = opposingGene.Item2;
             // apply the deviation of gene1 on gene2, so gene2 mutations are ignored
             gene2.HandleOpposingGene(gene1);
-            
-            /*// get the one with the most deviation (this technique doesn't work because it tends to go into the extremes and never come back)
-            var deviation1 = gene1.GetValueDeviationPercentage();
-            var deviation2 = gene2.GetValueDeviationPercentage();
-            var absDeviation1 = Math.Abs(deviation1);
-            var absDeviation2 = Math.Abs(deviation2);
-            if (Math.Abs(absDeviation1 - absDeviation2) < 0.01f)
-            {
-                continue;
-            }
-            
-            // Special case where on of the gene has already a high deviation
-            if (absDeviation1 > 0.85f)
-            {
-                gene1.HandleOpposingGene(gene2);
-                continue;
-            }
-            if (absDeviation2 > 0.85f)
-            {
-                gene2.HandleOpposingGene(gene1);
-                continue;
-            }
-            
-            if (absDeviation1 > absDeviation2)
-            {
-                // debug opposing genes and their deviation
-                Debug.Log($"Opposing Genes: {gene1.GetType().Name} and {gene2.GetType().Name} with deviation {deviation1} and {deviation2}");
-                gene2.HandleOpposingGene(gene1);
-            }
-            else
-            {
-                // debug opposing genes and their deviation
-                Debug.Log($"Opposing Genes: {gene1.GetType().Name} and {gene2.GetType().Name} with deviation {deviation1} and {deviation2}");
-                gene1.HandleOpposingGene(gene2);
-            }*/
         }
     }
     
     public void AddOpposingGene<T>(T gene1, T gene2) where T : Gene
     {
         OpposingGenes.Add(new Tuple<Gene, Gene>(gene1, gene2));
+    }
+    
+    public void BuildDefaultGenome()
+    {
+        // the data is in Assets/_Project/Resources/GlobalGenesSettings.asset
+        GlobalGenesSettings genesSettings = Resources.Load<GlobalGenesSettings>("GlobalGenesSettings");
+        
+        // BUILD AND ADD ALL DEFAULT GENES
+        GeneSize geneSize = GeneBuilder<GeneSize>.CreateGene()
+            .WithSettings(genesSettings.GetGeneSettings<GeneSize>())
+            .Build();
+        Genes.Add(geneSize);
+        
+        GeneHealth geneHealth = GeneBuilder<GeneHealth>.CreateGene()
+            .WithSettings(genesSettings.GetGeneSettings<GeneHealth>())
+            .Build();
+        Genes.Add(geneHealth);
+        
+        GeneAttackSpeed geneAttackSpeed = GeneBuilder<GeneAttackSpeed>.CreateGene()
+            .WithSettings(genesSettings.GetGeneSettings<GeneAttackSpeed>())
+            .Build();
+        Genes.Add(geneAttackSpeed);
+        
+        GenePrecision genePrecision = GeneBuilder<GenePrecision>.CreateGene()
+            .WithSettings(genesSettings.GetGeneSettings<GenePrecision>())
+            .Build();
+        Genes.Add(genePrecision);
+        
+        GeneProjectileCount geneProjectileCount = GeneBuilder<GeneProjectileCount>.CreateGene()
+            .WithSettings(genesSettings.GetGeneSettings<GeneProjectileCount>())
+            .Build();
+        Genes.Add(geneProjectileCount);
+        
+        GeneProjectileRange geneProjectileRange = GeneBuilder<GeneProjectileRange>.CreateGene()
+            .WithSettings(genesSettings.GetGeneSettings<GeneProjectileRange>())
+            .Build();
+        Genes.Add(geneProjectileRange);
+        
+        GeneProjectileSpeed geneProjectileSpeed = GeneBuilder<GeneProjectileSpeed>.CreateGene()
+            .WithSettings(genesSettings.GetGeneSettings<GeneProjectileSpeed>())
+            .Build();
+        Genes.Add(geneProjectileSpeed);
+        
+        GeneProjectileSize geneProjectileSize = GeneBuilder<GeneProjectileSize>.CreateGene()
+            .WithSettings(genesSettings.GetGeneSettings<GeneProjectileSize>())
+            .Build();
+        Genes.Add(geneProjectileSize);
+        
+        GeneVisionRange geneVisionRange = GeneBuilder<GeneVisionRange>.CreateGene()
+            .WithSettings(genesSettings.GetGeneSettings<GeneVisionRange>())
+            .Build();
+        Genes.Add(geneVisionRange);
+        
+        GeneVisionWidth geneVisionWidth = GeneBuilder<GeneVisionWidth>.CreateGene()
+            .WithSettings(genesSettings.GetGeneSettings<GeneVisionWidth>())
+            .Build();
+        Genes.Add(geneVisionWidth);
+        
+        GeneRotationSpeed geneRotationSpeed = GeneBuilder<GeneRotationSpeed>.CreateGene()
+            .WithSettings(genesSettings.GetGeneSettings<GeneRotationSpeed>())
+            .Build();
+        Genes.Add(geneRotationSpeed);
+        
+        GeneMovementSpeed geneMovementSpeed = GeneBuilder<GeneMovementSpeed>.CreateGene()
+            .WithSettings(genesSettings.GetGeneSettings<GeneMovementSpeed>())
+            .Build();
+        Genes.Add(geneMovementSpeed);
+        
+        GeneProjectileLifespan geneProjectileLifespan = GeneBuilder<GeneProjectileLifespan>.CreateGene()
+            .WithSettings(genesSettings.GetGeneSettings<GeneProjectileLifespan>())
+            .Build();
+        Genes.Add(geneProjectileLifespan);
+        
+        // PAIR OPPOSING GENES
+        AddOpposingGene<Gene>(geneSize, geneHealth);
+        AddOpposingGene<Gene>(geneAttackSpeed, genePrecision);
+        AddOpposingGene<Gene>(geneProjectileCount, geneProjectileRange);
+        AddOpposingGene<Gene>(geneProjectileSpeed, geneProjectileSize);
+        AddOpposingGene<Gene>(geneVisionRange, geneVisionWidth);
+        AddOpposingGene<Gene>(geneRotationSpeed, geneMovementSpeed);
     }
     
     public override string ToString()

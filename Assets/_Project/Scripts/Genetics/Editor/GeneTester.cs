@@ -43,4 +43,13 @@ public class GeneTesterEditorWindow : OdinEditorWindow
         }
         Debug.Log("Mutation Complete");
     }
+    
+    [Button(ButtonSizes.Large)]
+    private void TestBuildDefaultGenome()
+    {
+        Genome genome = new Genome();
+        genome.BuildDefaultGenome();
+        
+        Debug.Log("Default Genome: \n" + genome);
+    }
 }
