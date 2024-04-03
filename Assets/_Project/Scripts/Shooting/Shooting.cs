@@ -25,6 +25,7 @@ public class Shooting : MonoBehaviour
         var damage = ProjectileSettings.DefaultDamage; // TODO : GeneProjectileDamage
         var speed = ProjectileSettings.DefaultSpeed + Bestiole.Genome.GetGene<GeneProjectileSpeed>().Value * ProjectileSettings.DefaultSpeed;
         var size = ProjectileSettings.DefaultSize + Bestiole.Genome.GetGene<GeneProjectileSize>().Value * ProjectileSettings.DefaultSize;
-        bullet.SetupBullet(damage, speed, size, direction.normalized, Bestiole);
+        var lifetime = ProjectileSettings.DefaultLifespan + Bestiole.Genome.GetGene<GeneProjectileLifespan>().Value * ProjectileSettings.DefaultLifespan;
+        bullet.SetupBullet(damage, speed, size, lifetime, direction.normalized, Bestiole);
     }
 }

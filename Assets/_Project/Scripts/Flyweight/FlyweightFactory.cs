@@ -7,8 +7,8 @@ using UnityEngine.Pool;
 public class FlyweightFactory : MonoBehaviour
 {
     [field: SerializeField] public bool CollisionCheck { get; private set; }
-    [field: SerializeField] public int DefaultCapacity { get; private set; }
-    [field: SerializeField] public int MaxPoolSize { get; private set; }
+    [field: SerializeField] public int DefaultCapacity { get; private set; } = 100;
+    [field: SerializeField] public int MaxPoolSize { get; private set; } = 400;
     
     public static FlyweightFactory Instance;
     private readonly Dictionary<FlyweightType, IObjectPool<Flyweight>> _pools = new();
