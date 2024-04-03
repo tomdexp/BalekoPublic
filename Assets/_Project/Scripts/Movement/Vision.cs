@@ -13,7 +13,7 @@ public class Vision : MonoBehaviour
     [SerializeField]private LayerMask _foodLayer;
 
     //Events
-    public UnityEvent<GameObject> OnEnemySpoted;
+    public UnityEvent<GameObject> OnEnemySpotted;
     public UnityEvent<GameObject> OnCollectableSpoted;
 
 
@@ -71,7 +71,7 @@ public class Vision : MonoBehaviour
         }
         if (collision.TryGetComponent<Bestiole>(out Bestiole bestiole))
         {
-            OnEnemySpoted?.Invoke(collision.gameObject);
+            OnEnemySpotted?.Invoke(collision.gameObject);
         }
     }
 

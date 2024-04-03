@@ -33,8 +33,9 @@ public class Movement : MonoBehaviour
         _currentDirection = Vector3.zero;
         NoiseInfluence();
         StormInfluence();
-        //if (Bestiole.Hungerable.CurrentValue / Bestiole.Hungerable.MaxValue > 0.2f)
-        EnemyInfluence();
+        if (Bestiole.Hungerable.CurrentValue / Bestiole.Hungerable.MaxValue > 0.2f && Bestiole.targetList.Count > 0)
+            EnemyInfluence();
+
         _rigidbody2D.velocity = _rigidbody2D.velocity * 0.999f * Time.fixedDeltaTime;
         _rigidbody2D.AddForce(_currentDirection);
 
@@ -57,6 +58,7 @@ public class Movement : MonoBehaviour
 
     void EnemyInfluence()
     {
+        _currentDirection = (Bestiole.targetList[0].transform.position - transform.position).normalized;
         //TODO WHEN ENEMY
         //_currentDirection += ToEnemySpeed
     }

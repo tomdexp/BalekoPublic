@@ -11,11 +11,15 @@ public class Bestiole : Flyweight
         set => base.Settings = value;
     }
     
+    [Header("Scripts")]
     public Genome Genome;
     public Damageable Damageable;
     public Damageable Hungerable;
     public UI_BarValue HealthBar;
     public UI_BarValue HungerBar;
+    public Vision Vision;
+
+    [Header("Components")]
     public SpriteRenderer SpriteRenderer;
     public Transform BulletSpawnPoint;
 
@@ -28,6 +32,8 @@ public class Bestiole : Flyweight
     [Header("Prefabs")]
     public Collectable CollectablePrefab;
 
+    public List<Bestiole> targetList = new List<Bestiole>();
+
     public void Awake()
     {
         _movement = GetComponent<Movement>();
@@ -36,9 +42,18 @@ public class Bestiole : Flyweight
         {
             Damageable.OnSubstractValue.AddListener(OnDamaged);
             Damageable.OnZeroValue.AddListener(OnDead);
+        }
+
+        if (Hungerable)
+        {
             Hungerable.OnSubstractValue.AddListener(OnHungered);
             Hungerable.OnZeroValue.AddListener(OnHungerDead);
         }
+        if (Vision)
+        {
+            Vision.OnEnemySpotted.AddListener(OnEnemySpotted);
+        }
+
     }
 
     public void SetupBestiole()
@@ -94,5 +109,12 @@ public class Bestiole : Flyweight
     public void OnHungerDead()
     {
         FlyweightFactory.ReturnToPool(this);
+    }
+
+    public void OnEnemySpotted(GameObject enemy)
+    {
+        Bestiole bestiole = enemy.GetComponent<Bestiole>();
+        if (enemy != null)
+            targetList.Add(bestiole);
     }
 }
