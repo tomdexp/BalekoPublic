@@ -28,9 +28,9 @@ public class Bestiole : MonoBehaviour
 
     public void OnDamaged(float damage)
     {
-        SpriteRenderer.transform.DOScale(1.5f, .1f).OnComplete(() =>
+        SpriteRenderer.transform.DOScale(1f, .1f).OnComplete(() =>
         {
-            SpriteRenderer.transform.DOScale(1f, .1f);
+            SpriteRenderer.transform.DOScale(0.5f, .1f);
         });
     }
 
