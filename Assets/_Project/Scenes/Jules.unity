@@ -127,6 +127,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5308978126009768627, guid: 2cc62e2fb03737d49a0ae8c9cdc27938, type: 3}
+      propertyPath: m_Name
+      value: Bestiole (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 9002063060622916263, guid: 2cc62e2fb03737d49a0ae8c9cdc27938, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.05
@@ -167,18 +171,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1915912930399120479, guid: 2cc62e2fb03737d49a0ae8c9cdc27938, type: 3}
-      propertyPath: RotateSpeed
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5308978126009768627, guid: 2cc62e2fb03737d49a0ae8c9cdc27938, type: 3}
-      propertyPath: m_Name
-      value: Bestiole (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5308978126009768627, guid: 2cc62e2fb03737d49a0ae8c9cdc27938, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -192,6 +184,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5308978126009768627, guid: 2cc62e2fb03737d49a0ae8c9cdc27938, type: 3}
+      propertyPath: m_Name
+      value: Bestiole (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 9002063060622916263, guid: 2cc62e2fb03737d49a0ae8c9cdc27938, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.37
@@ -231,18 +227,6 @@ PrefabInstance:
     - target: {fileID: 9002063060622916263, guid: 2cc62e2fb03737d49a0ae8c9cdc27938, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1915912930399120479, guid: 2cc62e2fb03737d49a0ae8c9cdc27938, type: 3}
-      propertyPath: RotateSpeed
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5308978126009768627, guid: 2cc62e2fb03737d49a0ae8c9cdc27938, type: 3}
-      propertyPath: m_Name
-      value: Bestiole (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5308978126009768627, guid: 2cc62e2fb03737d49a0ae8c9cdc27938, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -303,6 +287,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5308978126009768627, guid: 2cc62e2fb03737d49a0ae8c9cdc27938, type: 3}
+      propertyPath: m_Name
+      value: Bestiole (3)
+      objectReference: {fileID: 0}
     - target: {fileID: 9002063060622916263, guid: 2cc62e2fb03737d49a0ae8c9cdc27938, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.42
@@ -343,18 +331,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1915912930399120479, guid: 2cc62e2fb03737d49a0ae8c9cdc27938, type: 3}
-      propertyPath: RotateSpeed
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5308978126009768627, guid: 2cc62e2fb03737d49a0ae8c9cdc27938, type: 3}
-      propertyPath: m_Name
-      value: Bestiole (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5308978126009768627, guid: 2cc62e2fb03737d49a0ae8c9cdc27938, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -368,6 +344,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5308978126009768627, guid: 2cc62e2fb03737d49a0ae8c9cdc27938, type: 3}
+      propertyPath: m_Name
+      value: Bestiole (5)
+      objectReference: {fileID: 0}
     - target: {fileID: 9002063060622916263, guid: 2cc62e2fb03737d49a0ae8c9cdc27938, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.09
@@ -408,18 +388,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1915912930399120479, guid: 2cc62e2fb03737d49a0ae8c9cdc27938, type: 3}
-      propertyPath: RotateSpeed
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5308978126009768627, guid: 2cc62e2fb03737d49a0ae8c9cdc27938, type: 3}
-      propertyPath: m_Name
-      value: Bestiole (5)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5308978126009768627, guid: 2cc62e2fb03737d49a0ae8c9cdc27938, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -433,6 +401,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5308978126009768627, guid: 2cc62e2fb03737d49a0ae8c9cdc27938, type: 3}
+      propertyPath: m_Name
+      value: Bestiole (4)
+      objectReference: {fileID: 0}
     - target: {fileID: 9002063060622916263, guid: 2cc62e2fb03737d49a0ae8c9cdc27938, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.95
@@ -472,18 +444,6 @@ PrefabInstance:
     - target: {fileID: 9002063060622916263, guid: 2cc62e2fb03737d49a0ae8c9cdc27938, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1915912930399120479, guid: 2cc62e2fb03737d49a0ae8c9cdc27938, type: 3}
-      propertyPath: RotateSpeed
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5308978126009768627, guid: 2cc62e2fb03737d49a0ae8c9cdc27938, type: 3}
-      propertyPath: m_Name
-      value: Bestiole (4)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5308978126009768627, guid: 2cc62e2fb03737d49a0ae8c9cdc27938, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -721,21 +681,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5785361657691016852, guid: 2cc62e2fb03737d49a0ae8c9cdc27938, type: 3}
-      propertyPath: m_Positions.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5785361657691016852, guid: 2cc62e2fb03737d49a0ae8c9cdc27938, type: 3}
-      propertyPath: m_Positions.Array.data[2].z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5785361657691016852, guid: 2cc62e2fb03737d49a0ae8c9cdc27938, type: 3}
-      propertyPath: m_Positions.Array.data[3].z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5785361657691016852, guid: 2cc62e2fb03737d49a0ae8c9cdc27938, type: 3}
-      propertyPath: m_Positions.Array.data[4].z
-      value: 1
+    - target: {fileID: 5308978126009768627, guid: 2cc62e2fb03737d49a0ae8c9cdc27938, type: 3}
+      propertyPath: m_Name
+      value: Bestiole
       objectReference: {fileID: 0}
     - target: {fileID: 9002063060622916263, guid: 2cc62e2fb03737d49a0ae8c9cdc27938, type: 3}
       propertyPath: m_LocalPosition.x
@@ -776,14 +724,6 @@ PrefabInstance:
     - target: {fileID: 9002063060622916263, guid: 2cc62e2fb03737d49a0ae8c9cdc27938, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1915912930399120479, guid: 2cc62e2fb03737d49a0ae8c9cdc27938, type: 3}
-      propertyPath: RotateSpeed
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5308978126009768627, guid: 2cc62e2fb03737d49a0ae8c9cdc27938, type: 3}
-      propertyPath: m_Name
-      value: Bestiole
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

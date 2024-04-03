@@ -39,9 +39,9 @@ public class Movement : MonoBehaviour
         rigidbody2D.velocity = rigidbody2D.velocity * 0.999f * Time.fixedDeltaTime;
         rigidbody2D.AddForce(_currentDirection);
 
-        _currentAngleVec = model.transform.right;
+        _currentAngleVec = model.transform.up;
         
-        model.transform.right = Vector3.Slerp(_currentAngleVec, rigidbody2D.velocity.normalized, RotateSpeed * Time.fixedDeltaTime);
+        model.transform.up = Vector3.Slerp(_currentAngleVec, rigidbody2D.velocity.normalized, RotateSpeed * Time.fixedDeltaTime);
     }
 
     void NoiseInfluence()

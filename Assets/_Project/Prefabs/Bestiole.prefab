@@ -337,9 +337,12 @@ LineRenderer:
   m_Positions:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.1
+    widthMultiplier: 0.05
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -394,7 +397,7 @@ LineRenderer:
     generateLightingData: 0
   m_MaskInteraction: 0
   m_UseWorldSpace: 0
-  m_Loop: 0
+  m_Loop: 1
   m_ApplyActiveColorSpace: 1
 --- !u!1 &5308978126009768627
 GameObject:
@@ -471,7 +474,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 1054156550675998822}
   Speed: 70
-  RotateSpeed: 0
+  RotateSpeed: 4
   ToEnemySpeed: 0
   StormInfluenceSpeed: 300
   EraticScale: 0.1
@@ -544,7 +547,7 @@ MonoBehaviour:
   model: {fileID: 1054156550675998822}
   Fov: 128.27
   VisionRange: 1
-  VerticeNum: 3
+  VerticeNum: 15
   Line: {fileID: 5785361657691016852}
 --- !u!50 &2617134034527995848
 Rigidbody2D:

@@ -20,9 +20,9 @@ public class Vision : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Line.positionCount = VerticeNum;
-        int iter = 15;
-        float baseAngle = Mathf.Deg2Rad * model.transform.eulerAngles.z;
+        Line.positionCount = VerticeNum + 1;
+        int iter = VerticeNum+1;
+        float baseAngle = Mathf.Deg2Rad * (model.transform.eulerAngles.z +90);
         Vector3[] points = new Vector3[iter + 3];
 
         points[0] = Vector3.zero;
@@ -42,8 +42,8 @@ public class Vision : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.white;
-        int iter = 15;
-        float baseAngle = Mathf.Deg2Rad * model.transform.eulerAngles.z;
+        int iter = VerticeNum;
+        float baseAngle = Mathf.Deg2Rad * (model.transform.eulerAngles.z+90);
         Vector3[] points = new Vector3[iter + 3];
 
         points[0] = transform.position;
