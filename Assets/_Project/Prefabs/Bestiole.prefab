@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2084830037134127633}
   - component: {fileID: 5171028038840053579}
+  - component: {fileID: 6156456786486142473}
   - component: {fileID: 5246639645555891399}
   m_Layer: 0
   m_Name: Bestiole
@@ -169,11 +170,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29332fed04a8408459835af7ff9c882c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  model: {fileID: 8015918712893257218}
   Speed: 70
   RotateSpeed: 0
   ToEnemySpeed: 0
   StormInfluenceSpeed: 300
   EraticScale: 0.1
+--- !u!114 &6156456786486142473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9122501836225696483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a7d6f7dff3d76d44ac91353c4ca9a94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 8015918712893257218}
+  Fov: 68.56
+  VisionRange: 1
 --- !u!50 &5246639645555891399
 Rigidbody2D:
   serializedVersion: 4
