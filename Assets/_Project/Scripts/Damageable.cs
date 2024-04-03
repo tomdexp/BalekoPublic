@@ -6,21 +6,22 @@ using Sirenix.OdinInspector;
 
 public class Damageable : MonoBehaviour
 {
-    [HideInInspector] public UnityEvent<int> OnDamage = new UnityEvent<int>();
-    [HideInInspector] public UnityEvent OnDeath;
-    public float CurrentHealth;
+    [HideInInspector] public UnityEvent<float> OnReduceValue = new UnityEvent<float>();
+    [HideInInspector] public UnityEvent OnZeroValue;
+    public float CurrentValue;
+    public float MaxValue;
 
     [Button]
-    public void Damage(int damage)
+    public void Damage(float damage)
     {        
-        CurrentHealth -= damage;
-        if (CurrentHealth <= 0) Death();
-        OnDamage?.Invoke(damage);
+        CurrentValue -= damage;
+        if (CurrentValue <= 0) Death();
+        OnReduceValue?.Invoke(damage);
     }
 
     public void Death()
     {
-        CurrentHealth = 0;
-        OnDeath?.Invoke();
+        CurrentValue = 0;
+        OnZeroValue?.Invoke();
     }
 }
