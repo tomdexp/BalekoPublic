@@ -25,8 +25,8 @@ public class GeneTesterEditorWindow : OdinEditorWindow
     private void TestGenomeWithMutation(int mutationCount = 50)
     {
         var parent1 = new Genome();
-        GeneSpeed geneSpeed = new GeneSpeed();
-        GeneSize geneSize = new GeneSize();
+        GeneSpeed geneSpeed = GeneBuilder<GeneSpeed>.CreateGene().Build();
+        GeneSize geneSize = GeneBuilder<GeneSize>.CreateGene().Build();
         parent1.Genes.Add(geneSpeed);
         parent1.Genes.Add(geneSize);
         parent1.AddOpposingGene<Gene>(geneSpeed, geneSize); // this mean geneSpeed is dominant and we only take the mutation of geneSpeed into account
