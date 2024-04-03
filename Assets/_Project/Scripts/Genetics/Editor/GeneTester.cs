@@ -15,7 +15,7 @@ public class GeneTesterEditorWindow : OdinEditorWindow
     private void TestGenome()
     {
         var parent1 = new Genome();
-        parent1.Genes.Add(new GeneSpeed());
+        parent1.Genes.Add(new GeneMovementSpeed());
         parent1.Genes.Add(new GeneSize());
         
         Debug.Log("Parent 1: \n" + parent1);
@@ -25,11 +25,13 @@ public class GeneTesterEditorWindow : OdinEditorWindow
     private void TestGenomeWithMutation(int mutationCount = 50)
     {
         var parent1 = new Genome();
-        GeneSpeed geneSpeed = GeneBuilder<GeneSpeed>.CreateGene().Build();
+        
+        // We use the GeneBuilder to create the genes because it allows method like WithMutationRate to be called
+        GeneMovementSpeed geneMovementSpeed = GeneBuilder<GeneMovementSpeed>.CreateGene().Build();
         GeneSize geneSize = GeneBuilder<GeneSize>.CreateGene().Build();
-        parent1.Genes.Add(geneSpeed);
+        parent1.Genes.Add(geneMovementSpeed);
         parent1.Genes.Add(geneSize);
-        parent1.AddOpposingGene<Gene>(geneSpeed, geneSize); // this mean geneSpeed is dominant and we only take the mutation of geneSpeed into account
+        parent1.AddOpposingGene<Gene>(geneMovementSpeed, geneSize); // this mean geneSpeed is dominant and we only take the mutation of geneSpeed into account
         
         Debug.Log("Beginning Mutation:");
         Debug.Log("Parent 1: \n" + parent1);
