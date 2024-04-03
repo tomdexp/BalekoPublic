@@ -37,8 +37,8 @@ MonoBehaviour:
     MaxMutationRate: 0.5
     MutationChance: 0.5
   - GeneTypeName: GeneHealth
-    MinValue: -1
-    MaxValue: 1
+    MinValue: -0.8
+    MaxValue: 2
     MutationRate: 0.1
     MinMutationRate: 0.01
     MaxMutationRate: 0.5
@@ -99,13 +99,6 @@ MonoBehaviour:
     MinMutationRate: 0.01
     MaxMutationRate: 0.5
     MutationChance: 0.5
-  - GeneTypeName: GeneRange
-    MinValue: -1
-    MaxValue: 1
-    MutationRate: 0.1
-    MinMutationRate: 0.01
-    MaxMutationRate: 0.5
-    MutationChance: 0.5
   - GeneTypeName: GeneRotationSpeed
     MinValue: -1
     MaxValue: 1
@@ -135,6 +128,13 @@ MonoBehaviour:
     MaxMutationRate: 0.5
     MutationChance: 0.5
   - GeneTypeName: GeneVisionWidth
+    MinValue: -1
+    MaxValue: 1
+    MutationRate: 0.1
+    MinMutationRate: 0.01
+    MaxMutationRate: 0.5
+    MutationChance: 0.5
+  - GeneTypeName: GeneProjectileRange
     MinValue: -1
     MaxValue: 1
     MutationRate: 0.1
