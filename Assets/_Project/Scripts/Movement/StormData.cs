@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "StormData", menuName = "SriptableData/StormData")]
+[CreateAssetMenu(fileName = "StormData", menuName = "ScriptableData/StormData")]
 public class StormData : ScriptableObject
 {
     public float SizeDecreaseSpeed;
