@@ -452,6 +452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eafcc8c9ecc06146974cb76f02fb55f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Settings: {fileID: 0}
   Damageable: {fileID: 1241160710046056093}
   Hungerable: {fileID: 5785861268402039529}
   HealthBar: {fileID: 2399582177377736468}
@@ -538,7 +539,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bestiole: {fileID: 4408224179290954141}
-  BulletPrefab: {fileID: 9088293945593838749, guid: 04fe214fd8c931e48bb17e808ced49a7, type: 3}
+  ProjectileSettings: {fileID: 11400000, guid: 35bcad9ee2704704c94b2ac9343d6b8b, type: 2}
 --- !u!114 &289868908695958191
 MonoBehaviour:
   m_ObjectHideFlags: 0

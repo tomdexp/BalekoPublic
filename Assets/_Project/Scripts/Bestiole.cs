@@ -3,8 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class Bestiole : MonoBehaviour
+public class Bestiole : Flyweight
 {
+    public new BestioleSettings Settings
+    {
+        get => (BestioleSettings)base.Settings;
+        set => base.Settings = value;
+    }
+    
     public Genome Genome;
     public Damageable Damageable;
     public Damageable Hungerable;
@@ -16,12 +22,16 @@ public class Bestiole : MonoBehaviour
     [Header("Stats")]
     public float lifeTime;
     public int killNumber;
+    
+    private Movement _movement;
 
     [Header("Prefabs")]
     public Collectable CollectablePrefab;
 
     public void Awake()
     {
+        _movement = GetComponent<Movement>();
+        
         if (Damageable)
         {
             Damageable.OnSubstractValue.AddListener(OnDamaged);
@@ -33,10 +43,21 @@ public class Bestiole : MonoBehaviour
 
     public void SetupBestiole()
     {
+        if (Genome == null)
+        {
+            Genome = new Genome();
+            Genome.BuildDefaultGenome();
+            Genome.Mutate();
+        }
+        
         lifeTime = 0;
         killNumber = 0;
-        //Damageable.MaxHealth = _enemyData.MaxHealth; //will be used to setup current life on start
-        //Hungerable.MaxValue = _enemyData.MaxHealth; //will be used to setup current life on start
+        Damageable.MaxValue = Settings.DefaultMaxHealth + Settings.DefaultMaxHealth * Genome.GetGene<GeneHealth>().Value;
+        Damageable.CurrentValue = Damageable.MaxValue;
+        Hungerable.MaxValue = Settings.DefaultMaxHunger; // TODO : GeneHunger
+        Hungerable.CurrentValue = Hungerable.MaxValue;
+        _movement.Speed = Settings.DefaultMovementSpeed + Settings.DefaultMovementSpeed * Genome.GetGene<GeneMovementSpeed>().Value;
+        _movement.RotateSpeed = Settings.DefaultRotationSpeed + Settings.DefaultRotationSpeed * Genome.GetGene<GeneRotationSpeed>().Value;
     }
 
     private void Update()
@@ -62,7 +83,7 @@ public class Bestiole : MonoBehaviour
         transform.DOKill();
         Collectable collectable = Instantiate(CollectablePrefab);
         collectable.transform.position = transform.position;
-        Destroy(gameObject);
+        FlyweightFactory.ReturnToPool(this);
     }
 
     public void OnHungered(float damage)
@@ -72,6 +93,6 @@ public class Bestiole : MonoBehaviour
 
     public void OnHungerDead()
     {
-        Destroy(gameObject);
+        FlyweightFactory.ReturnToPool(this);
     }
 }
