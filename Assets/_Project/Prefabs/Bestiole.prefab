@@ -252,7 +252,7 @@ Transform:
   m_GameObject: {fileID: 2880669787645220869}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.37, z: 0}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -458,11 +458,13 @@ MonoBehaviour:
   Hungerable: {fileID: 5785861268402039529}
   HealthBar: {fileID: 2399582177377736468}
   HungerBar: {fileID: 3273258511740386879}
+  Vision: {fileID: 289868908695958191}
   SpriteRenderer: {fileID: 2861398670148814054}
   BulletSpawnPoint: {fileID: 7187484686685766232}
   lifeTime: 0
   killNumber: 0
   CollectablePrefab: {fileID: 9030775092286064308, guid: 0ab8f61b683d7ce42b1b27f4223f6649, type: 3}
+  targetList: []
 --- !u!114 &1915912930399120479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -556,9 +558,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 1054156550675998822}
   Fov: 128.27
-  VisionRange: 1
+  VisionRange: 3
   VerticeNum: 15
   Line: {fileID: 5785361657691016852}
+  _foodLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  OnEnemySpotted:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCollectableSpoted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!50 &2617134034527995848
 Rigidbody2D:
   serializedVersion: 4

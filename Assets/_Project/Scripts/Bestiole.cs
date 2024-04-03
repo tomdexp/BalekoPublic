@@ -69,10 +69,13 @@ public class Bestiole : Flyweight
         killNumber = 0;
         Damageable.MaxValue = Settings.DefaultMaxHealth + Settings.DefaultMaxHealth * Genome.GetGene<GeneHealth>().Value;
         Damageable.CurrentValue = Damageable.MaxValue;
+        HealthBar.SetBarValue(Damageable.CurrentValue, Damageable.MaxValue);
         Hungerable.MaxValue = Settings.DefaultMaxHunger; // TODO : GeneHunger
         Hungerable.CurrentValue = Hungerable.MaxValue;
+        HungerBar.SetBarValue(Hungerable.CurrentValue, Hungerable.MaxValue);
         _movement.Speed = Settings.DefaultMovementSpeed + Settings.DefaultMovementSpeed * Genome.GetGene<GeneMovementSpeed>().Value;
         _movement.RotateSpeed = Settings.DefaultRotationSpeed + Settings.DefaultRotationSpeed * Genome.GetGene<GeneRotationSpeed>().Value;
+        targetList.Clear();
     }
 
     private void Update()
@@ -114,7 +117,7 @@ public class Bestiole : Flyweight
     public void OnEnemySpotted(GameObject enemy)
     {
         Bestiole bestiole = enemy.GetComponent<Bestiole>();
-        if (enemy != null)
+        if (bestiole != null && !targetList.Contains(bestiole))
             targetList.Add(bestiole);
     }
 }

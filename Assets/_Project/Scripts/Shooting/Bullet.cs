@@ -59,6 +59,8 @@ public class Bullet : Flyweight
         Bestiole bestiole = collision.GetComponentInParent<Bestiole>();
         if (bestiole != null)
         {
+            if (bestiole == Sender)
+                Debug.Log("SAME SENDER AND DAMAGED");
             bestiole.Damageable.Substract(Damage);
             Sender.killNumber++;
             if (_spriteRenderer != null)

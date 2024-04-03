@@ -69,9 +69,10 @@ public class Vision : MonoBehaviour
         {
             OnCollectableSpoted?.Invoke(collision.gameObject);
         }
-        if (collision.TryGetComponent<Bestiole>(out Bestiole bestiole))
+        if (collision.transform.parent == null) return;
+        if (collision.transform.parent.TryGetComponent<Bestiole>(out Bestiole bestiole))
         {
-            OnEnemySpotted?.Invoke(collision.gameObject);
+            OnEnemySpotted?.Invoke(bestiole.gameObject);
         }
     }
 
@@ -94,5 +95,4 @@ public class Vision : MonoBehaviour
 
         Gizmos.DrawLineStrip(points, true);
     }
-
 }
