@@ -27,9 +27,9 @@ public class Bullet : MonoBehaviour
 
     public void DestroyBullet()
     {
-        _spriteRenderer.transform.DOScale(0.75f, .1f).OnComplete(() =>
+        _spriteRenderer.transform.DOScale(0.5f, .1f).OnComplete(() =>
         {
-            _spriteRenderer.transform.DOScale(0.5f, .1f).OnComplete(() =>
+            _spriteRenderer.transform.DOScale(0.3f, .1f).OnComplete(() =>
             {
                 transform.DOKill();
                 Destroy(gameObject);
@@ -42,9 +42,10 @@ public class Bullet : MonoBehaviour
         Bestiole bestiole = collision.GetComponentInParent<Bestiole>();
         if (bestiole != null)
         {
-            bestiole.Damageable.Damage(Damage);
+            bestiole.Damageable.Substract(Damage);
             Sender.killNumber++;
-            DestroyBullet();
+            if (_spriteRenderer != null)
+                DestroyBullet();
         }
     }
 }
