@@ -255,7 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b54f832fc5d4e3fb9d5cab525d8d5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BestiolePrefab: {fileID: 5975866291714310590, guid: 94a54132245971e4da3fd7fc887cd87d, type: 3}
+  BestiolePrefab: {fileID: 4408224179290954141, guid: 2cc62e2fb03737d49a0ae8c9cdc27938, type: 3}
   PopulationGroupSize: 30
   PopulationGroupCount: 6
   MinSpawnRadius: 9.8

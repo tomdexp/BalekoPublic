@@ -29,7 +29,7 @@ public class GlobalGenesSettings : SerializedScriptableObject
     {
         var geneTypes = Assembly.GetAssembly(typeof(Gene)).GetTypes()
             .Where(t => t.IsClass && !t.IsAbstract && t.IsSubclassOf(typeof(Gene)))
-            .Select(t => t.Name).ToHashSet(); // Convert to HashSet for efficient lookup
+            .Select(t => t.Name).ToHashSet();
 
         // Add new gene types to the settings
         foreach (var geneTypeName in geneTypes)
