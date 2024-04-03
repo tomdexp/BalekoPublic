@@ -40,9 +40,9 @@ public class BestioleManager : MonoBehaviour
                 // Convert polar coordinates to Cartesian coordinates
                 Vector2 spawnPosition = new Vector3(radius * Mathf.Cos(angle), radius * Mathf.Sin(angle));
 
-                // TODO: Use Object Pooling here
                 var flyweight = FlyweightFactory.Spawn(BestioleSettings);
                 var bestiole = flyweight.GetComponent<Bestiole>();
+                flyweight.gameObject.transform.position = spawnPosition;
                 _bestioles[i].Add(bestiole);
 
                 yield return null;
