@@ -21,9 +21,9 @@ public class Bestiole : MonoBehaviour
     {
         if (Damageable)
         {
-            Damageable.OnReduceValue.AddListener(OnDamaged);
+            Damageable.OnSubstractValue.AddListener(OnDamaged);
             Damageable.OnZeroValue.AddListener(OnDead);
-            Hungerable.OnReduceValue.AddListener(OnHungered);
+            Hungerable.OnSubstractValue.AddListener(OnHungered);
             Hungerable.OnZeroValue.AddListener(OnHungerDead);
         }
     }
@@ -39,15 +39,18 @@ public class Bestiole : MonoBehaviour
     private void Update()
     {
         lifeTime += Time.deltaTime;
-        Hungerable.Damage(0.02f);
+        Hungerable.Substract(0.02f);
     }
 
     public void OnDamaged(float damage)
     {
-        SpriteRenderer.transform.DOScale(0.75f, .1f).OnComplete(() =>
+        if (Damageable.CurrentValue > 0)
         {
-            SpriteRenderer.transform.DOScale(0.5f, .1f);
-        });
+            SpriteRenderer.transform.DOScale(0.75f, .1f).OnComplete(() =>
+            {
+                SpriteRenderer.transform.DOScale(0.5f, .1f);
+            });
+        }
         HealthBar.SetBarValue(Damageable.CurrentValue, Damageable.MaxValue);
     }
 
@@ -60,7 +63,6 @@ public class Bestiole : MonoBehaviour
     public void OnHungered(float damage)
     {
         HungerBar.SetBarValue(Hungerable.CurrentValue, Hungerable.MaxValue);
-
     }
 
     public void OnHungerDead()
