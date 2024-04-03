@@ -1,6 +1,6 @@
-﻿public class GeneSpeed : Gene
+﻿public class GeneRange : Gene
 {
-    public GeneSpeed()
+    public GeneRange()
     {
         MinValue = -1f;
         MaxValue = 1f;
