@@ -22,6 +22,6 @@ public class Shooting : MonoBehaviour
         timer = 0;
         Bullet bullet = Instantiate(BulletPrefab);
         bullet.transform.position = Bestiole.BulletSpawnPoint.position;
-        bullet.SetupBullet(10, 10, new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized);
+        bullet.SetupBullet(10, 10, new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized, Bestiole);
     }
 }

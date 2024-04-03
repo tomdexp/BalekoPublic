@@ -7,15 +7,17 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D Rigidbody;
     [SerializeField] private SpriteRenderer _spriteRenderer;
+    public Bestiole Sender;
     public float Damage;
     public float Speed;
     public Vector2 Direction;
 
-    public void SetupBullet(float damage, float speed, Vector2 direction)
+    public void SetupBullet(float damage, float speed, Vector2 direction, Bestiole sender)
     {
         Damage = damage;
         Speed = speed;
         Direction = direction;
+        Sender = sender;
     }
 
     private void Update()
@@ -29,6 +31,7 @@ public class Bullet : MonoBehaviour
         {
             _spriteRenderer.transform.DOScale(0.5f, .1f).OnComplete(() =>
             {
+                transform.DOKill();
                 Destroy(gameObject);
             });
         });
@@ -40,6 +43,7 @@ public class Bullet : MonoBehaviour
         if (bestiole != null)
         {
             bestiole.Damageable.Damage(Damage);
+            Sender.killNumber++;
             DestroyBullet();
         }
     }

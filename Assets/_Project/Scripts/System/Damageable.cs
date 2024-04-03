@@ -13,7 +13,8 @@ public class Damageable : MonoBehaviour
 
     [Button]
     public void Damage(float damage)
-    {        
+    {
+        if (CurrentValue <= 0) return;
         CurrentValue -= damage;
         if (CurrentValue <= 0) Death();
         OnReduceValue?.Invoke(damage);
