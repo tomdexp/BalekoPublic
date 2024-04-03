@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 
 public class BestioleManager : MonoBehaviour
 {
-    public Bestiole BestiolePrefab;
+    public FlyweightSettings BestioleSettings;
     public int PopulationGroupSize = 10;
     public int PopulationGroupCount = 3; // so that will be 20 bestioles
     public float MinSpawnRadius = 10f;
@@ -41,7 +41,8 @@ public class BestioleManager : MonoBehaviour
                 Vector2 spawnPosition = new Vector3(radius * Mathf.Cos(angle), radius * Mathf.Sin(angle));
 
                 // TODO: Use Object Pooling here
-                var bestiole = Instantiate(BestiolePrefab, spawnPosition, Quaternion.identity);
+                var flyweight = FlyweightFactory.Spawn(BestioleSettings);
+                var bestiole = flyweight.GetComponent<Bestiole>();
                 _bestioles[i].Add(bestiole);
 
                 yield return null;
