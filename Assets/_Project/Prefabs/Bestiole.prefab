@@ -475,6 +475,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29332fed04a8408459835af7ff9c882c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bestiole: {fileID: 0}
   model: {fileID: 1054156550675998822}
   Speed: 70
   RotateSpeed: 4
@@ -558,6 +559,15 @@ MonoBehaviour:
   VisionRange: 1
   VerticeNum: 15
   Line: {fileID: 5785361657691016852}
+  _foodLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  OnEnemySpoted:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCollectableSpoted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!50 &2617134034527995848
 Rigidbody2D:
   serializedVersion: 4
