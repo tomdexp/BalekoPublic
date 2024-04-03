@@ -13,21 +13,32 @@ public class Bestiole : MonoBehaviour
     public SpriteRenderer SpriteRenderer;
     public Transform BulletSpawnPoint;
 
+    [Header("Stats")]
+    public float lifeTime;
+    public int killNumber;
+
     public void Awake()
     {
         if (Damageable)
         {
-            //Damageable.MaxHealth = _enemyData.MaxHealth; //will be used to setup current life on start
             Damageable.OnReduceValue.AddListener(OnDamaged);
             Damageable.OnZeroValue.AddListener(OnDead);
             Hungerable.OnReduceValue.AddListener(OnHungered);
             Hungerable.OnZeroValue.AddListener(OnHungerDead);
-            //Hungerable.MaxValue = _enemyData.MaxHealth; //will be used to setup current life on start
         }
+    }
+
+    public void SetupBestiole()
+    {
+        lifeTime = 0;
+        killNumber = 0;
+        //Damageable.MaxHealth = _enemyData.MaxHealth; //will be used to setup current life on start
+        //Hungerable.MaxValue = _enemyData.MaxHealth; //will be used to setup current life on start
     }
 
     private void Update()
     {
+        lifeTime += Time.deltaTime;
         Hungerable.Damage(0.02f);
     }
 
@@ -42,6 +53,7 @@ public class Bestiole : MonoBehaviour
 
     public void OnDead()
     {
+        transform.DOKill();
         Destroy(gameObject);
     }
 
