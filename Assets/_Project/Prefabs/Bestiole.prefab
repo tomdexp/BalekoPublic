@@ -455,6 +455,8 @@ MonoBehaviour:
   HungerBar: {fileID: 3273258511740386879}
   SpriteRenderer: {fileID: 2861398670148814054}
   BulletSpawnPoint: {fileID: 7187484686685766232}
+  lifeTime: 0
+  killNumber: 0
 --- !u!114 &1915912930399120479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -543,7 +545,7 @@ MonoBehaviour:
   Fov: 128.27
   VisionRange: 1
   VerticeNum: 3
-  Line: {fileID: 0}
+  Line: {fileID: 5785361657691016852}
 --- !u!50 &2617134034527995848
 Rigidbody2D:
   serializedVersion: 4
