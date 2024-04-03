@@ -11,6 +11,5 @@ public class UI_BarValue : MonoBehaviour
     {
         RectTransform rect = (RectTransform) _image.transform;
         rect.anchorMax = new Vector2(currentValue / maxValue, 1);
-        Debug.Log(currentValue / maxValue);
     }
 }

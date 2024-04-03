@@ -27,7 +27,7 @@ public class Bestiole : MonoBehaviour
 
     private void Update()
     {
-        Hungerable.Damage(0.1f);
+        Hungerable.Damage(0.02f);
     }
 
     public void OnDamaged(float damage)
