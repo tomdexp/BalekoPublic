@@ -11,6 +11,7 @@ public class Bestiole : MonoBehaviour
     public UI_BarValue HealthBar;
     public UI_BarValue HungerBar;
     public SpriteRenderer SpriteRenderer;
+    public Transform BulletSpawnPoint;
 
     public void Awake()
     {
@@ -27,7 +28,7 @@ public class Bestiole : MonoBehaviour
 
     private void Update()
     {
-        Hungerable.Damage(0.1f);
+        Hungerable.Damage(0.02f);
     }
 
     public void OnDamaged(float damage)

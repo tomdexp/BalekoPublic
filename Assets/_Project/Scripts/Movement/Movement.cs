@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    public GameObject model;
     //ToReplaceLater
     public float Speed;
     public float RotateSpeed;
@@ -14,6 +15,7 @@ public class Movement : MonoBehaviour
     private float _noiseRandomizerX;
     private float _noiseRandomizerY;
     private Vector3 _currentDirection;
+    private Vector3 _currentAngleVec;
     private Rigidbody2D rigidbody2D;
     private Storm _storm;
 
@@ -36,6 +38,10 @@ public class Movement : MonoBehaviour
 
         rigidbody2D.velocity = rigidbody2D.velocity * 0.999f * Time.fixedDeltaTime;
         rigidbody2D.AddForce(_currentDirection);
+
+        _currentAngleVec = model.transform.right;
+        
+        model.transform.right = Vector3.Slerp(_currentAngleVec, rigidbody2D.velocity.normalized, RotateSpeed * Time.fixedDeltaTime);
     }
 
     void NoiseInfluence()
