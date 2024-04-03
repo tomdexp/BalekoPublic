@@ -22,13 +22,12 @@ public class MapGenerator : MonoBehaviour
     [Required]
     public GameObject MapObject;
 
-    private Storm _storm;
+    [SerializeField, Required] private Storm _storm;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        _storm = GameObject.FindFirstObjectByType<Storm>();
         GenerateMap();
     }
 
