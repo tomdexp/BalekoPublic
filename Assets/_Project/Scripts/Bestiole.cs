@@ -17,6 +17,9 @@ public class Bestiole : MonoBehaviour
     public float lifeTime;
     public int killNumber;
 
+    [Header("Prefabs")]
+    public Collectable CollectablePrefab;
+
     public void Awake()
     {
         if (Damageable)
@@ -57,6 +60,8 @@ public class Bestiole : MonoBehaviour
     public void OnDead()
     {
         transform.DOKill();
+        Collectable collectable = Instantiate(CollectablePrefab);
+        collectable.transform.position = transform.position;
         Destroy(gameObject);
     }
 

@@ -460,6 +460,7 @@ MonoBehaviour:
   BulletSpawnPoint: {fileID: 7187484686685766232}
   lifeTime: 0
   killNumber: 0
+  CollectablePrefab: {fileID: 9030775092286064308, guid: 0ab8f61b683d7ce42b1b27f4223f6649, type: 3}
 --- !u!114 &1915912930399120479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -490,7 +491,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77425f26423d77c468c1535bb7f812d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnReduceValue:
+  OnSubstractValue:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAddValue:
     m_PersistentCalls:
       m_Calls: []
   OnZeroValue:
@@ -510,7 +514,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77425f26423d77c468c1535bb7f812d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnReduceValue:
+  OnSubstractValue:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAddValue:
     m_PersistentCalls:
       m_Calls: []
   OnZeroValue:
