@@ -17,14 +17,24 @@ public class Bullet : Flyweight
     public float Damage;
     public float Speed;
     public Vector2 Direction;
+    public float Lifetime;
 
-    public void SetupBullet(float damage, float speed, float size, Vector2 direction, Bestiole sender)
+    public void SetupBullet(float damage, float speed, float size, float lifetime,Vector2 direction, Bestiole sender)
     {
         Damage = damage;
         Speed = speed;
         transform.localScale = new Vector2(size, size);
+        Lifetime = lifetime;
         Direction = direction;
         Sender = sender;
+        
+        StartCoroutine(LifetimeCoroutine());
+    }
+    
+    private IEnumerator LifetimeCoroutine()
+    {
+        yield return new WaitForSeconds(Lifetime);
+        if (gameObject.activeSelf) DestroyBullet();
     }
 
     private void Update()
