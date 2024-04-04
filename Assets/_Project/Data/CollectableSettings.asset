@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4917783754f4c148c0a4d980bcf0042, type: 3}
   m_Name: CollectableSettings
   m_EditorClassIdentifier: 
-  Type: 0
-  Prefab: {fileID: 0}
+  Type: 2
+  Prefab: {fileID: 8464976113938043700, guid: 0ab8f61b683d7ce42b1b27f4223f6649, type: 3}
   HungerRestoreAmount: 10
