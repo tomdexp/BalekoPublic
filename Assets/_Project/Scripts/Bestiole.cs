@@ -85,7 +85,7 @@ public class Bestiole : Flyweight
     private void Update()
     {
         lifeTime += Time.deltaTime;
-        Hungerable.Substract(0.02f);
+        Hungerable.Substract(0.02f * Time.timeScale);
     }
 
     public void OnDamaged(float damage)
@@ -103,9 +103,15 @@ public class Bestiole : Flyweight
     public void OnDead()
     {
         transform.DOKill();
-        var collectableFlyweight = FlyweightFactory.Spawn(CollectableSettings);
-        collectableFlyweight.transform.position = transform.position;
-        FlyweightFactory.ReturnToPool(this);
+        SpriteRenderer.transform.DOScale(0.75f, .1f).OnComplete(() =>
+        {
+            SpriteRenderer.transform.DOScale(0.5f, .1f).OnComplete(() =>
+            {
+                var collectableFlyweight = FlyweightFactory.Spawn(CollectableSettings);
+                collectableFlyweight.transform.position = transform.position;
+                FlyweightFactory.ReturnToPool(this);
+            });
+        });
     }
 
     public void OnHungered(float damage)
@@ -115,7 +121,10 @@ public class Bestiole : Flyweight
 
     public void OnHungerDead()
     {
-        FlyweightFactory.ReturnToPool(this);
+        SpriteRenderer.transform.DOScale(0f, .1f).OnComplete(() =>
+        {
+            FlyweightFactory.ReturnToPool(this);
+        });
     }
 
     public void OnEnemySpotted(GameObject go)
