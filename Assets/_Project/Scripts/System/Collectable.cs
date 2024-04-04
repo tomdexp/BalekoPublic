@@ -14,7 +14,8 @@ public class Collectable : Flyweight
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Bestiole bestiole = other.GetComponentInParent<Bestiole>();
+        if (other.transform.parent == null) return;
+        Bestiole bestiole = other.transform.parent.GetComponent<Bestiole>();
         if (bestiole != null)
         {
             bestiole.Hungerable.Substract(-Settings.HungerRestoreAmount);

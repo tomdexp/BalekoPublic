@@ -11,11 +11,15 @@ public class Bestiole : Flyweight
         set => base.Settings = value;
     }
     
+    [Header("Scripts")]
     public Genome Genome;
     public Damageable Damageable;
     public Damageable Hungerable;
     public UI_BarValue HealthBar;
     public UI_BarValue HungerBar;
+    public Vision Vision;
+
+    [Header("Components")]
     public SpriteRenderer SpriteRenderer;
     public Transform BulletSpawnPoint;
 
@@ -28,6 +32,9 @@ public class Bestiole : Flyweight
     [Header("Flyweight Factory Settings")]
     public CollectableSettings CollectableSettings;
 
+    public List<Bestiole> targetList = new List<Bestiole>();
+    public List<Collectable> collectableList = new List<Collectable>();
+
     public void Awake()
     {
         _movement = GetComponent<Movement>();
@@ -36,9 +43,19 @@ public class Bestiole : Flyweight
         {
             Damageable.OnSubstractValue.AddListener(OnDamaged);
             Damageable.OnZeroValue.AddListener(OnDead);
+        }
+
+        if (Hungerable)
+        {
             Hungerable.OnSubstractValue.AddListener(OnHungered);
             Hungerable.OnZeroValue.AddListener(OnHungerDead);
         }
+        if (Vision)
+        {
+            Vision.OnEnemySpotted.AddListener(OnEnemySpotted);
+            Vision.OnCollectableSpotted.AddListener(OnCollectableSpotted);
+        }
+
     }
 
     public void SetupBestiole()
@@ -54,10 +71,13 @@ public class Bestiole : Flyweight
         killNumber = 0;
         Damageable.MaxValue = Settings.DefaultMaxHealth + Settings.DefaultMaxHealth * Genome.GetGene<GeneHealth>().Value;
         Damageable.CurrentValue = Damageable.MaxValue;
+        HealthBar.SetBarValue(Damageable.CurrentValue, Damageable.MaxValue);
         Hungerable.MaxValue = Settings.DefaultMaxHunger; // TODO : GeneHunger
         Hungerable.CurrentValue = Hungerable.MaxValue;
+        HungerBar.SetBarValue(Hungerable.CurrentValue, Hungerable.MaxValue);
         _movement.Speed = Settings.DefaultMovementSpeed + Settings.DefaultMovementSpeed * Genome.GetGene<GeneMovementSpeed>().Value;
         _movement.RotateSpeed = Settings.DefaultRotationSpeed + Settings.DefaultRotationSpeed * Genome.GetGene<GeneRotationSpeed>().Value;
+        targetList.Clear();
     }
 
     private void Update()
@@ -94,5 +114,19 @@ public class Bestiole : Flyweight
     public void OnHungerDead()
     {
         FlyweightFactory.ReturnToPool(this);
+    }
+
+    public void OnEnemySpotted(GameObject go)
+    {
+        Bestiole bestiole = go.GetComponent<Bestiole>();
+        if (bestiole != null && !targetList.Contains(bestiole))
+            targetList.Add(bestiole);
+    }
+
+    public void OnCollectableSpotted(GameObject go)
+    {
+        Collectable collectable = go.GetComponent<Collectable>();
+        if (collectable != null && !collectableList.Contains(collectable))
+            collectableList.Add(collectable);
     }
 }

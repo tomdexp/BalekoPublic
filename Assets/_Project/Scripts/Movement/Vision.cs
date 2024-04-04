@@ -13,8 +13,8 @@ public class Vision : MonoBehaviour
     [SerializeField]private LayerMask _foodLayer;
 
     //Events
-    public UnityEvent<GameObject> OnEnemySpoted;
-    public UnityEvent<GameObject> OnCollectableSpoted;
+    public UnityEvent<GameObject> OnEnemySpotted;
+    public UnityEvent<GameObject> OnCollectableSpotted;
 
 
     Vector3[] points;
@@ -67,11 +67,12 @@ public class Vision : MonoBehaviour
     {
         if (collision.TryGetComponent<Collectable>(out Collectable collectable))
         {
-            OnCollectableSpoted?.Invoke(collision.gameObject);
+            OnCollectableSpotted?.Invoke(collision.gameObject);
         }
-        if (collision.TryGetComponent<Bestiole>(out Bestiole bestiole))
+        if (collision.transform.parent == null) return;
+        if (collision.transform.parent.TryGetComponent<Bestiole>(out Bestiole bestiole))
         {
-            OnEnemySpoted?.Invoke(collision.gameObject);
+            OnEnemySpotted?.Invoke(bestiole.gameObject);
         }
     }
 
@@ -94,5 +95,4 @@ public class Vision : MonoBehaviour
 
         Gizmos.DrawLineStrip(points, true);
     }
-
 }

@@ -18,6 +18,7 @@ public class Bullet : Flyweight
     public float Speed;
     public Vector2 Direction;
     public float Lifetime;
+    public bool bulletCanBounce;
 
     public void SetupBullet(float damage, float speed, float size, float lifetime,Vector2 direction, Bestiole sender)
     {
@@ -27,15 +28,16 @@ public class Bullet : Flyweight
         Lifetime = lifetime;
         Direction = direction;
         Sender = sender;
-        
+
         StartCoroutine(LifetimeCoroutine());
     }
-    
+
     private IEnumerator LifetimeCoroutine()
     {
         yield return new WaitForSeconds(Lifetime);
         if (gameObject.activeSelf) DestroyBullet();
     }
+
 
     private void Update()
     {
@@ -56,9 +58,12 @@ public class Bullet : Flyweight
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Bestiole bestiole = collision.GetComponentInParent<Bestiole>();
+        if (collision.transform.parent == null) return;
+        Bestiole bestiole = collision.transform.parent.GetComponent<Bestiole>();
         if (bestiole != null)
         {
+            if (bestiole == Sender && !bulletCanBounce)
+                return;
             bestiole.Damageable.Substract(Damage);
             Sender.killNumber++;
             if (_spriteRenderer != null)
