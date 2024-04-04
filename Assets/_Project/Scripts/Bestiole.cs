@@ -33,6 +33,7 @@ public class Bestiole : Flyweight
     public Collectable CollectablePrefab;
 
     public List<Bestiole> targetList = new List<Bestiole>();
+    public List<Collectable> collectableList = new List<Collectable>();
 
     public void Awake()
     {
@@ -52,6 +53,7 @@ public class Bestiole : Flyweight
         if (Vision)
         {
             Vision.OnEnemySpotted.AddListener(OnEnemySpotted);
+            Vision.OnCollectableSpotted.AddListener(OnCollectableSpotted);
         }
 
     }
@@ -114,10 +116,17 @@ public class Bestiole : Flyweight
         FlyweightFactory.ReturnToPool(this);
     }
 
-    public void OnEnemySpotted(GameObject enemy)
+    public void OnEnemySpotted(GameObject go)
     {
-        Bestiole bestiole = enemy.GetComponent<Bestiole>();
+        Bestiole bestiole = go.GetComponent<Bestiole>();
         if (bestiole != null && !targetList.Contains(bestiole))
             targetList.Add(bestiole);
+    }
+
+    public void OnCollectableSpotted(GameObject go)
+    {
+        Collectable collectable = go.GetComponent<Collectable>();
+        if (collectable != null && !collectableList.Contains(collectable))
+            collectableList.Add(collectable);
     }
 }

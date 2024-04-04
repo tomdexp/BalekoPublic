@@ -14,7 +14,7 @@ public class Vision : MonoBehaviour
 
     //Events
     public UnityEvent<GameObject> OnEnemySpotted;
-    public UnityEvent<GameObject> OnCollectableSpoted;
+    public UnityEvent<GameObject> OnCollectableSpotted;
 
 
     Vector3[] points;
@@ -67,7 +67,7 @@ public class Vision : MonoBehaviour
     {
         if (collision.TryGetComponent<Collectable>(out Collectable collectable))
         {
-            OnCollectableSpoted?.Invoke(collision.gameObject);
+            OnCollectableSpotted?.Invoke(collision.gameObject);
         }
         if (collision.transform.parent == null) return;
         if (collision.transform.parent.TryGetComponent<Bestiole>(out Bestiole bestiole))
