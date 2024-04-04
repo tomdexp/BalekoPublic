@@ -580,7 +580,7 @@ PlayerSettings:
     PS4: DOTWEEN;dUI_TextMeshPro
     PS5: DOTWEEN;dUI_TextMeshPro
     QNX: DOTWEEN;dUI_TextMeshPro
-    Standalone: ODIN_INSPECTOR;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1;DOTWEEN;dUI_TextMeshPro
+    Standalone: ODIN_INSPECTOR;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1;DOTWEEN
     WebGL: DOTWEEN;dUI_TextMeshPro
     Windows Store Apps: DOTWEEN;dUI_TextMeshPro
     XboxOne: DOTWEEN;dUI_TextMeshPro

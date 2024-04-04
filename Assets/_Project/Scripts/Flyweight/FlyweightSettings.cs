@@ -8,7 +8,13 @@ public class FlyweightSettings : ScriptableObject
     
     public virtual Flyweight Create()
     {
-        var go = Instantiate(Prefab);
+        GameObject parent = GameObject.Find(Prefab.name + " Pool");
+        if (parent == null)
+        {
+            parent = new GameObject(Prefab.name + " Pool");
+        }
+        
+        var go = Instantiate(Prefab, parent.transform);
         go.SetActive(true);
         go.name = Prefab.name;
         
