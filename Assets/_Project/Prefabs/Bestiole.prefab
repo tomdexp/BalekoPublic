@@ -465,6 +465,7 @@ MonoBehaviour:
   killNumber: 0
   CollectablePrefab: {fileID: 9030775092286064308, guid: 0ab8f61b683d7ce42b1b27f4223f6649, type: 3}
   targetList: []
+  collectableList: []
 --- !u!114 &1915912930399120479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -477,7 +478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29332fed04a8408459835af7ff9c882c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bestiole: {fileID: 0}
+  Bestiole: {fileID: 4408224179290954141}
   model: {fileID: 1054156550675998822}
   Speed: 70
   RotateSpeed: 4
@@ -567,7 +568,7 @@ MonoBehaviour:
   OnEnemySpotted:
     m_PersistentCalls:
       m_Calls: []
-  OnCollectableSpoted:
+  OnCollectableSpotted:
     m_PersistentCalls:
       m_Calls: []
 --- !u!50 &2617134034527995848
