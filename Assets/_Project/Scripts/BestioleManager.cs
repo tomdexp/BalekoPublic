@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -12,9 +13,11 @@ public class BestioleManager : MonoBehaviour
     public int PopulationGroupCount = 3; // so that will be 20 bestioles
     public float MinSpawnRadius = 10f;
     public float MaxSpawnRadius = 12f;
+    public int CurrentGeneration = 0;
+    public int MaxGeneration = 100;
+    public int MaxBestioleToReproducePerPopulation = 5;
     
-    private Dictionary<int, List<Bestiole>> _bestioles = new Dictionary<int, List<Bestiole>>();
-    private readonly WaitForEndOfFrame _waitForEndOfFrame = new WaitForEndOfFrame();
+    private Dictionary<int, List<Bestiole>> _bestiolesPerPopulation = new Dictionary<int, List<Bestiole>>();
     
     [Button(ButtonSizes.Large)]
     public void SpawnAllBestioles()
@@ -22,13 +25,46 @@ public class BestioleManager : MonoBehaviour
         StartCoroutine(SpawnAllBestiolesCoroutine());
     }
 
+    [Button(ButtonSizes.Large)]
+    public void StartLoop()
+    {
+        StartCoroutine(StartLoopCoroutine());
+    }
+   
+    public IEnumerator StartLoopCoroutine()
+    {
+        SpawnAllBestioles(); // Initial spawn
+
+        yield return new WaitForSeconds(3f);
+        
+        while (CurrentGeneration < MaxGeneration)
+        {
+            // Wait until there is 1 or less Bestiole active in the entire scene
+            yield return new WaitUntil(() => 
+                _bestiolesPerPopulation.Values.Sum(population => population.Count(bestiole => bestiole.gameObject.activeSelf)) <= 0);
+
+            // End of generation: calculate fitness for all remaining active Bestioles
+            CalculateFitness();
+
+            // Generate the new generation based on fitness
+            GenerateNewGeneration();
+            
+            // Respawn all Bestioles for the new generation
+            SpawnAllBestioles();
+
+            // Add a short delay before starting the next generation loop
+            yield return new WaitForSeconds(1.0f);
+        }
+    }
+
+
     private IEnumerator SpawnAllBestiolesCoroutine()
     {
-        _bestioles.Clear();
+        _bestiolesPerPopulation.Clear();
         // Spread the spawn over multiple frames
         for (int i = 0; i < PopulationGroupCount; i++)
         {
-            _bestioles.Add(i, new List<Bestiole>());
+            _bestiolesPerPopulation.Add(i, new List<Bestiole>());
             for (int j = 0; j < PopulationGroupSize; j++)
             {
                 // Generate a random angle between 0 and 360 degrees (in radians)
@@ -43,17 +79,111 @@ public class BestioleManager : MonoBehaviour
                 var flyweight = FlyweightFactory.Spawn(BestioleSettings);
                 var bestiole = flyweight.GetComponent<Bestiole>();
                 flyweight.gameObject.transform.position = spawnPosition;
-                _bestioles[i].Add(bestiole);
+                _bestiolesPerPopulation[i].Add(bestiole);
 
                 yield return null;
             }
         }
     }
 
+    private void CalculateFitness()
+    {
+        foreach (var bestioles in _bestiolesPerPopulation.Values)
+        {
+            foreach (var bestiole in bestioles)
+            {
+                bestiole.Fitness = bestiole.killNumber * 10 + bestiole.lifeTime;
+            }
+        }
+    }
+
+    private void GenerateNewGeneration()
+    {
+        Dictionary<int, List<Genome>> newPopulationsGenomes = new Dictionary<int, List<Genome>>();
+
+        foreach (var populationEntry in _bestiolesPerPopulation)
+        {
+            int populationId = populationEntry.Key;
+            List<Bestiole> bestioles = populationEntry.Value;
+
+            float totalFitness = bestioles.Sum(b => b.Fitness);
+
+            List<Genome> selectedGenomesForReproduction = new List<Genome>();
+
+            // Select genomes for reproduction
+            for (int i = 0; i < MaxBestioleToReproducePerPopulation; i++)
+            {
+                float randomPoint = Random.value * totalFitness;
+                float currentSum = 0;
+                foreach (var bestiole in bestioles)
+                {
+                    currentSum += bestiole.Fitness;
+                    if (currentSum >= randomPoint)
+                    {
+                        var offspringGenome = bestiole.Genome.Clone();
+                        offspringGenome.Mutate();
+                        selectedGenomesForReproduction.Add(offspringGenome);
+                        break; // Found the genome for this iteration
+                    }
+                }
+            }
+
+            // Now, ensure the population size matches PopulationGroupSize by cloning and mutating selected genomes
+            List<Genome> newGenomes = new List<Genome>();
+            while (newGenomes.Count < PopulationGroupSize)
+            {
+                foreach (var genome in selectedGenomesForReproduction)
+                {
+                    if (newGenomes.Count >= PopulationGroupSize) break; // Ensure not to exceed the population size
+
+                    // Clone and potentially mutate again for variation
+                    var newGenome = genome.Clone();
+                    newGenome.Mutate(); // Optional: You might choose to mutate or not here for additional diversity
+                    newGenomes.Add(newGenome);
+                }
+            }
+
+            // Assign the new list of genomes to the new population
+            newPopulationsGenomes[populationId] = newGenomes;
+        }
+
+        // Assign the Bestiole.Genome per population
+        // Assuming newPopulationsGenomes is filled with new genomes for each population
+        foreach (var populationEntry in _bestiolesPerPopulation)
+        {
+            int populationId = populationEntry.Key;
+            List<Bestiole> bestiolesInPopulation = populationEntry.Value;
+            List<Genome> genomesForPopulation = newPopulationsGenomes[populationId];
+
+            for (int i = 0; i < bestiolesInPopulation.Count; i++)
+            {
+                // It's crucial that the size of genomesForPopulation matches bestiolesInPopulation.Count
+                // Set the new genome for each Bestiole
+                if (bestiolesInPopulation.Count != genomesForPopulation.Count)
+                {
+                    Debug.LogError("Genome count does not match Bestiole count");
+                    return;
+                }
+                
+                bestiolesInPopulation[i].Genome = genomesForPopulation[i];
+        
+                // Optionally, if the Bestiole needs to be reset or repositioned after getting a new genome,
+                // you can call a method here to do that. For example:
+                // bestiolesInPopulation[i].ResetToInitialConditions();
+
+                // If Bestioles are deactivated and need to be reactivated, do it here
+                // bestiolesInPopulation[i].gameObject.SetActive(true);
+            }
+        }
+        CurrentGeneration++;
+    }
+
+
+
     
     private void MutateAllBestioles()
     {
-        foreach (var bestioles in _bestioles.Values)
+        foreach (var bestioles in _bestiolesPerPopulation.Values)
         {
             foreach (var bestiole in bestioles)
             {
