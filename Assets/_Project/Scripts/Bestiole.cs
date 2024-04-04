@@ -29,8 +29,8 @@ public class Bestiole : Flyweight
     
     private Movement _movement;
 
-    [Header("Prefabs")]
-    public Collectable CollectablePrefab;
+    [Header("Flyweight Factory Settings")]
+    public CollectableSettings CollectableSettings;
 
     public List<Bestiole> targetList = new List<Bestiole>();
     public List<Collectable> collectableList = new List<Collectable>();
@@ -101,8 +101,8 @@ public class Bestiole : Flyweight
     public void OnDead()
     {
         transform.DOKill();
-        Collectable collectable = Instantiate(CollectablePrefab);
-        collectable.transform.position = transform.position;
+        var collectableFlyweight = FlyweightFactory.Spawn(CollectableSettings);
+        collectableFlyweight.transform.position = transform.position;
         FlyweightFactory.ReturnToPool(this);
     }
 

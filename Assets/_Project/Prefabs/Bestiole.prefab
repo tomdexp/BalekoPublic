@@ -463,7 +463,7 @@ MonoBehaviour:
   BulletSpawnPoint: {fileID: 7187484686685766232}
   lifeTime: 0
   killNumber: 0
-  CollectablePrefab: {fileID: 9030775092286064308, guid: 0ab8f61b683d7ce42b1b27f4223f6649, type: 3}
+  CollectableSettings: {fileID: 11400000, guid: 9f154b1dc0e572141a19575446e9cb07, type: 2}
   targetList: []
   collectableList: []
 --- !u!114 &1915912930399120479
