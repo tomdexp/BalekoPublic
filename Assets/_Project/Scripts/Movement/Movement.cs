@@ -80,7 +80,7 @@ public class Movement : MonoBehaviour
 
     void FoodInfluence()
     {
-        if (Bestiole.collectableList[0] != null)
+        if (Bestiole.collectableList[0].gameObject.activeSelf)
         {
             _currentDirection = (Bestiole.collectableList[0].transform.position - transform.position).normalized * Speed;
         }
