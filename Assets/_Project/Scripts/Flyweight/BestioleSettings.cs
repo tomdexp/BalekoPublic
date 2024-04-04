@@ -8,6 +8,8 @@ public class BestioleSettings : FlyweightSettings
     public float DefaultRotationSpeed;
     public float DefaultMaxHealth;
     public float DefaultMaxHunger;
+    public float DefaultVisionRange = 3;
+    public float DefaultVisionWidth = 128;
 
     public override Flyweight Create()
     {

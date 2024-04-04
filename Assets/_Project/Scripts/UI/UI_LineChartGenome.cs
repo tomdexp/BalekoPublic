@@ -22,7 +22,7 @@ public class UI_LineChartGenome : MonoBehaviour
         _genome = new Genome();
         _genome.BuildDefaultGenome();
 
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 500; i++)
         {
             _genome.Mutate();
         }
