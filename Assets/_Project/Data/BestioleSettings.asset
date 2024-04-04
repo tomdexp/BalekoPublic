@@ -18,3 +18,5 @@ MonoBehaviour:
   DefaultRotationSpeed: 10
   DefaultMaxHealth: 100
   DefaultMaxHunger: 100
+  DefaultVisionRange: 3
+  DefaultVisionWidth: 128

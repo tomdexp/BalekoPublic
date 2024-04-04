@@ -49,3 +49,6 @@ MonoBehaviour:
   PopulationGroupCount: 1
   MinSpawnRadius: 9.8
   MaxSpawnRadius: 11.91
+  CurrentGeneration: 0
+  MaxGeneration: 100
+  MaxBestioleToReproducePerPopulation: 5
