@@ -86,7 +86,7 @@ public class Bestiole : Flyweight
         
         _currentSize = Settings.DefaultSize + Settings.DefaultSize * Genome.GetGene<GeneSize>().Value;
         Model.localScale = new Vector3(_currentSize, _currentSize, 1);
-        _shooting.AttackSpeed = Settings.DefaultAttackSpeed + Settings.DefaultAttackSpeed * Genome.GetGene<GeneAttackSpeed>().Value;
+        _shooting.AttackSpeed = Settings.DefaultAttackSpeed - Settings.DefaultAttackSpeed * Genome.GetGene<GeneAttackSpeed>().Value;
         _shooting.Angle = Settings.DefaultAttackAngle - Settings.DefaultAttackAngle * Genome.GetGene<GenePrecision>().Value;
         _shooting.ProjectileCount = Settings.DefaultProjectileCount + (int)(Genome.GetGene<GeneProjectileCount>().Value);
         Vision.VisionRange = Settings.DefaultVisionRange + Settings.DefaultVisionRange * Genome.GetGene<GeneVisionRange>().Value;

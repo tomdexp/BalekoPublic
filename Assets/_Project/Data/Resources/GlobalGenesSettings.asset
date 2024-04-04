@@ -134,10 +134,3 @@ MonoBehaviour:
     MinMutationRate: 0.01
     MaxMutationRate: 0.5
     MutationChance: 0.5
-  - GeneTypeName: GeneProjectileRange
-    MinValue: -0.3
-    MaxValue: 10
-    MutationRate: 0.1
-    MinMutationRate: 0.01
-    MaxMutationRate: 0.5
-    MutationChance: 0.5

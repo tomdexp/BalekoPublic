@@ -19,6 +19,7 @@ public class BestioleManager : MonoBehaviour
     
     private Dictionary<int, List<Bestiole>> _bestiolesPerPopulation = new Dictionary<int, List<Bestiole>>();
     private Storm _storm;
+    private MapGenerator _mapGenerator;
 
     private void Awake()
     {
@@ -26,6 +27,12 @@ public class BestioleManager : MonoBehaviour
         if (_storm == null)
         {
             Debug.LogError("No Storm found in the scene");
+        }
+        
+        _mapGenerator = FindAnyObjectByType<MapGenerator>();
+        if (_mapGenerator == null)
+        {
+            Debug.LogError("No MapGenerator found in the scene");
         }
     }
 
@@ -46,24 +53,27 @@ public class BestioleManager : MonoBehaviour
         yield return SpawnAllBestiolesCoroutine();
 
         yield return new WaitForSeconds(3f);
+        _storm.StartStorm();
         
         while (CurrentGeneration < MaxGeneration)
         {
             // Wait until there is 1 or less Bestiole active in the entire scene
             yield return new WaitUntil(() => 
                 _bestiolesPerPopulation.Values.Sum(population => population.Count(bestiole => bestiole.gameObject.activeSelf)) <= 0);
-
+            _storm.StopStorm();
             // End of generation: calculate fitness for all remaining active Bestioles
             CalculateFitness();
 
             // Generate the new generation based on fitness
             GenerateNewGeneration();
-            
+            _storm.ResetStorm();
+            _mapGenerator.GenerateMap();
             // Respawn all Bestioles for the new generation
             yield return RespawnAllBestiolesCoroutine();
-
+            
             // Add a short delay before starting the next generation loop
             yield return new WaitForSeconds(3f);
+            _storm.StartStorm();
         }
     }
 
