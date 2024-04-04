@@ -67,6 +67,8 @@ public class Bestiole : Flyweight
             Genome.Mutate();
         }
         
+        Vision.VisionRange = Settings.DefaultVisionRange + Settings.DefaultVisionRange * Genome.GetGene<GeneVisionRange>().Value;
+        Vision.Fov = Settings.DefaultVisionWidth + Settings.DefaultVisionWidth * Genome.GetGene<GeneVisionWidth>().Value;
         lifeTime = 0;
         killNumber = 0;
         Damageable.MaxValue = Settings.DefaultMaxHealth + Settings.DefaultMaxHealth * Genome.GetGene<GeneHealth>().Value;
