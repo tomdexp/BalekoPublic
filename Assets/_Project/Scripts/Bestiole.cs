@@ -26,6 +26,8 @@ public class Bestiole : Flyweight
     [Header("Stats")]
     public float lifeTime;
     public int killNumber;
+
+    public float Fitness;
     
     private Movement _movement;
 
@@ -69,6 +71,7 @@ public class Bestiole : Flyweight
         
         Vision.VisionRange = Settings.DefaultVisionRange + Settings.DefaultVisionRange * Genome.GetGene<GeneVisionRange>().Value;
         Vision.Fov = Settings.DefaultVisionWidth + Settings.DefaultVisionWidth * Genome.GetGene<GeneVisionWidth>().Value;
+        Fitness = 0;
         lifeTime = 0;
         killNumber = 0;
         Damageable.MaxValue = Settings.DefaultMaxHealth + Settings.DefaultMaxHealth * Genome.GetGene<GeneHealth>().Value;

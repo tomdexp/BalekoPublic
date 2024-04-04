@@ -81,6 +81,18 @@ public class Genome
         return genome;
     }
     
+    public Genome Clone()
+    {
+        var genome = new Genome();
+        foreach (var gene in Genes)
+        {
+            genome.Genes.Add(gene.Clone());
+        }
+        genome.MutationCount = MutationCount;
+        genome.GenomeHistory = new List<Genome>(GenomeHistory);
+        return genome;
+    }
+    
     private void HandleOpposingGenes()
     {
         foreach (var (gene1, gene2) in OpposingGenes)
