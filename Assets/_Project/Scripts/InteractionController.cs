@@ -34,7 +34,7 @@ public class InteractionController : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
-            RaycastHit2D hit = Physics2D.Raycast(Camera.main.transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), Mathf.Infinity, selectionLayerMask);
+            RaycastHit2D hit = Physics2D.Raycast(Camera.main.transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition) - Camera.main.transform.position, Mathf.Infinity, selectionLayerMask);
             if (hit)
             {
                 Bestiole bestiole = hit.transform.GetComponent<Bestiole>();

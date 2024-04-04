@@ -20,7 +20,7 @@ public class Bestiole : Flyweight
     public Vision Vision;
 
     [Header("Components")]
-    public SpriteRenderer SpriteRenderer;
+    public Transform Model;
     public Transform BulletSpawnPoint;
     public SpriteRenderer OutlineSpriteRenderer;
 
@@ -96,9 +96,9 @@ public class Bestiole : Flyweight
     {
         if (Damageable.CurrentValue > 0)
         {
-            SpriteRenderer.transform.DOScale(0.75f, .1f).OnComplete(() =>
+            Model.transform.DOScale(0.75f, .1f).OnComplete(() =>
             {
-                SpriteRenderer.transform.DOScale(0.5f, .1f);
+                Model.transform.DOScale(0.5f, .1f);
             });
         }
         HealthBar.SetBarValue(Damageable.CurrentValue, Damageable.MaxValue);
@@ -107,9 +107,9 @@ public class Bestiole : Flyweight
     public void OnDead()
     {
         transform.DOKill();
-        SpriteRenderer.transform.DOScale(0.75f, .1f).OnComplete(() =>
+        Model.transform.DOScale(0.75f, .1f).OnComplete(() =>
         {
-            SpriteRenderer.transform.DOScale(0.5f, .1f).OnComplete(() =>
+            Model.transform.DOScale(0.5f, .1f).OnComplete(() =>
             {
                 var collectableFlyweight = FlyweightFactory.Spawn(CollectableSettings);
                 collectableFlyweight.transform.position = transform.position;
@@ -125,7 +125,7 @@ public class Bestiole : Flyweight
 
     public void OnHungerDead()
     {
-        SpriteRenderer.transform.DOScale(0f, .1f).OnComplete(() =>
+        Model.transform.DOScale(0f, .1f).OnComplete(() =>
         {
             FlyweightFactory.ReturnToPool(this);
         });
