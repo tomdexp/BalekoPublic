@@ -69,8 +69,8 @@ public class Movement : MonoBehaviour
     {
         if (Bestiole.targetList[0].gameObject.activeSelf)
         {
-            if (Vector2.Distance(Bestiole.targetList[0].transform.position, Bestiole.transform.position) > 2.0f)
-                _currentDirection = (Bestiole.targetList[0].transform.position - transform.position).normalized;
+            if (Vector2.Distance(Bestiole.targetList[0].transform.position, Bestiole.transform.position) > Bestiole.Vision.VisionRange / 2)
+                _currentDirection = (Bestiole.targetList[0].transform.position - transform.position).normalized * Speed;
             else _currentDirection = Vector3.zero;
         } else
         {
@@ -80,10 +80,9 @@ public class Movement : MonoBehaviour
 
     void FoodInfluence()
     {
-        Debug.Log("food influence");
         if (Bestiole.collectableList[0] != null)
         {
-            _currentDirection = (Bestiole.collectableList[0].transform.position - transform.position).normalized;
+            _currentDirection = (Bestiole.collectableList[0].transform.position - transform.position).normalized * Speed;
         }
         else
         {
