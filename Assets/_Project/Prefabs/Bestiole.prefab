@@ -477,7 +477,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29332fed04a8408459835af7ff9c882c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bestiole: {fileID: 4408224179290954141}
+  Bestiole: {fileID: 0}
   model: {fileID: 1054156550675998822}
   Speed: 70
   RotateSpeed: 4

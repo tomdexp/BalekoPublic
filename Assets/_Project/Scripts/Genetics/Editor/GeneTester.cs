@@ -52,4 +52,27 @@ public class GeneTesterEditorWindow : OdinEditorWindow
         
         Debug.Log("Default Genome: \n" + genome);
     }
+    
+    [Button(ButtonSizes.Large, ButtonStyle.FoldoutButton)]
+    private void TestDefaultGenomeHistory(int mutationCount = 50)
+    {
+        var parent1 = new Genome();
+        parent1.BuildDefaultGenome();
+        
+        Debug.Log("Beginning Mutation:");
+        Debug.Log("Parent 1: \n" + parent1);
+        
+        for (var i = 0; i < mutationCount; i++)
+        {
+            parent1.Mutate();
+            Debug.Log("Parent 1: \n" + parent1);
+        }
+        
+        Debug.Log("Mutation Complete");
+
+        foreach (var genome in parent1.GenomeHistory)
+        {
+            Debug.Log("Genome: \n" + genome);
+        }
+    }
 }

@@ -7,6 +7,7 @@ public class Genome
     public List<Gene> Genes = new List<Gene>();
     public List<Tuple<Gene, Gene>> OpposingGenes = new List<Tuple<Gene, Gene>>();
     public uint MutationCount = 0;
+    public List<Genome> GenomeHistory = new List<Genome>();
 
     public T GetGene<T>() where T : Gene
     {
@@ -42,8 +43,23 @@ public class Genome
             gene.Mutate();
         }
         HandleOpposingGenes();
+        SaveInHistory();
     }
-    
+
+    private void SaveInHistory()
+    {
+        List<Gene> copiedGenes = new List<Gene>();
+        foreach (var gene in Genes)
+        {
+            copiedGenes.Add(gene.Clone());
+        }
+        GenomeHistory.Add(new Genome
+        {
+            Genes = copiedGenes,
+            MutationCount = MutationCount
+        });
+    }
+
     public static Genome CreateFromParents(Genome parent1, Genome parent2)
     {
         var genome = new Genome();

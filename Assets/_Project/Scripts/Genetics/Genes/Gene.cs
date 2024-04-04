@@ -56,4 +56,9 @@ public abstract class Gene
                $"[Value:{Value}|Min:{MinValue}|Max:{MaxValue}] " +
                $" [MutationRate:{MutationRate}|MutationChance:{MutationChance}|MutationCount:{MutationCount}|Min:{MinMutationRate}|Max:{MaxMutationRate}|Deviation:{GetValueDeviationPercentage()}]";
     }
+    
+    public Gene Clone()
+    {
+        return (Gene)MemberwiseClone();
+    }
 }
