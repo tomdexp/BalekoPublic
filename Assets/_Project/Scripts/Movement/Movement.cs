@@ -71,7 +71,7 @@ public class Movement : MonoBehaviour
         {
             if (Vector2.Distance(Bestiole.targetList[0].transform.position, Bestiole.transform.position) > Bestiole.Vision.VisionRange / 2)
                 _currentDirection = (Bestiole.targetList[0].transform.position - transform.position).normalized * Speed;
-            else _currentDirection = Vector3.zero;
+            else _currentDirection = (Bestiole.targetList[0].transform.position - transform.position).normalized;
         } else
         {
             Bestiole.targetList.Remove(Bestiole.targetList[0]);

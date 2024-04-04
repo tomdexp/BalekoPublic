@@ -5,9 +5,10 @@ public class Shooting : MonoBehaviour
     public Bestiole Bestiole;
     public ProjectileSettings ProjectileSettings;
 
-    private float timer;
+    private float timer = 2.0f;
     private void Update()
     {
+        if (Bestiole.targetList.Count == 0) return; 
         timer += Time.deltaTime;
         if (timer > 2.0f)
         {
