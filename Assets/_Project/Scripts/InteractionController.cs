@@ -48,8 +48,6 @@ public class InteractionController : MonoBehaviour
 
     public void ShowBestioleInfo(Bestiole bestiole)
     {
-        Debug.Log(bestiole.name);
-
         if (formerSelectedBestiole != null)
         {
             formerSelectedBestiole.OutlineSpriteRenderer.gameObject.SetActive(false);
