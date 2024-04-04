@@ -22,6 +22,7 @@ public class Bestiole : Flyweight
     [Header("Components")]
     public SpriteRenderer SpriteRenderer;
     public Transform BulletSpawnPoint;
+    public SpriteRenderer OutlineSpriteRenderer;
 
     [Header("Stats")]
     public float lifeTime;
