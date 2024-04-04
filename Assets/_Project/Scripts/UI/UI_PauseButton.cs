@@ -9,14 +9,14 @@ public class UI_PauseButton : MonoBehaviour
 
     public void Pause()
     {
-        if (Time.timeScale == 0)
+        if (Time.timeScale == Mathf.Epsilon)
         {
             Time.timeScale = 1;
             text.text = "Pause";
         }
         else
         {
-            Time.timeScale = 0;
+            Time.timeScale = Mathf.Epsilon;
             text.text = "Play";
         }
     }
