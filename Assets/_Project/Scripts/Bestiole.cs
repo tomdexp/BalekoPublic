@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Sirenix.OdinInspector;
 
 public class Bestiole : Flyweight
 {
@@ -37,10 +38,14 @@ public class Bestiole : Flyweight
 
     public List<Bestiole> targetList = new List<Bestiole>();
     public List<Collectable> collectableList = new List<Collectable>();
+    
+    private Shooting _shooting;
+    private float _currentSize;
 
     public void Awake()
     {
         _movement = GetComponent<Movement>();
+        _shooting = GetComponentInChildren<Shooting>();
         
         if (Damageable)
         {
@@ -61,6 +66,12 @@ public class Bestiole : Flyweight
 
     }
 
+    [Button(ButtonSizes.Large)]
+    public void DebugGenome()
+    {
+        Debug.Log(Genome, this);
+    }
+
     public void SetupBestiole()
     {
         if (Genome == null)
@@ -69,12 +80,17 @@ public class Bestiole : Flyweight
             Genome.BuildDefaultGenome();
             Genome.Mutate();
         }
-        
-        Vision.VisionRange = Settings.DefaultVisionRange + Settings.DefaultVisionRange * Genome.GetGene<GeneVisionRange>().Value;
-        Vision.Fov = Settings.DefaultVisionWidth + Settings.DefaultVisionWidth * Genome.GetGene<GeneVisionWidth>().Value;
         Fitness = 0;
         lifeTime = 0;
         killNumber = 0;
+        
+        _currentSize = Settings.DefaultSize + Settings.DefaultSize * Genome.GetGene<GeneSize>().Value;
+        Model.localScale = new Vector3(_currentSize, _currentSize, 1);
+        _shooting.AttackSpeed = Settings.DefaultAttackSpeed + Settings.DefaultAttackSpeed * Genome.GetGene<GeneAttackSpeed>().Value;
+        _shooting.Angle = Settings.DefaultAttackAngle - Settings.DefaultAttackAngle * Genome.GetGene<GenePrecision>().Value;
+        _shooting.ProjectileCount = Settings.DefaultProjectileCount + (int)(Genome.GetGene<GeneProjectileCount>().Value);
+        Vision.VisionRange = Settings.DefaultVisionRange + Settings.DefaultVisionRange * Genome.GetGene<GeneVisionRange>().Value;
+        Vision.Fov = Settings.DefaultVisionWidth + Settings.DefaultVisionWidth * Genome.GetGene<GeneVisionWidth>().Value;
         Damageable.MaxValue = Settings.DefaultMaxHealth + Settings.DefaultMaxHealth * Genome.GetGene<GeneHealth>().Value;
         Damageable.CurrentValue = Damageable.MaxValue;
         HealthBar.SetBarValue(Damageable.CurrentValue, Damageable.MaxValue);
@@ -96,20 +112,23 @@ public class Bestiole : Flyweight
     {
         if (Damageable.CurrentValue > 0)
         {
-            Model.transform.DOScale(0.75f, .1f).OnComplete(() =>
+            float targetScale = _currentSize * 0.75f;
+            Model.transform.DOScale(targetScale, .1f).SetEase(Ease.InOutBounce).OnComplete(() =>
             {
-                Model.transform.DOScale(0.5f, .1f);
+                Model.transform.DOScale(_currentSize, .1f).SetEase(Ease.InOutBounce);
             });
         }
+
         HealthBar.SetBarValue(Damageable.CurrentValue, Damageable.MaxValue);
     }
 
     public void OnDead()
     {
         transform.DOKill();
-        Model.transform.DOScale(0.75f, .1f).OnComplete(() =>
+        float targetScale = _currentSize * 1.25f;
+        Model.transform.DOScale(targetScale, .1f).SetEase(Ease.InOutBounce).OnComplete(() =>
         {
-            Model.transform.DOScale(0.5f, .1f).OnComplete(() =>
+            Model.transform.DOScale(0, .1f).SetEase(Ease.InOutBounce).OnComplete(() =>
             {
                 var collectableFlyweight = FlyweightFactory.Spawn(CollectableSettings);
                 collectableFlyweight.transform.position = transform.position;
@@ -125,10 +144,7 @@ public class Bestiole : Flyweight
 
     public void OnHungerDead()
     {
-        Model.transform.DOScale(0f, .1f).OnComplete(() =>
-        {
-            FlyweightFactory.ReturnToPool(this);
-        });
+        OnDead();
     }
 
     public void OnEnemySpotted(GameObject go)

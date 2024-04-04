@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Genome
 {
     public List<Gene> Genes = new List<Gene>();
-    public List<Tuple<Gene, Gene>> OpposingGenes = new List<Tuple<Gene, Gene>>();
+    public List<Tuple<Type, Type>> OpposingGenes = new List<Tuple<Type, Type>>();
     public uint MutationCount = 0;
     public List<Genome> GenomeHistory = new List<Genome>();
 
@@ -90,22 +91,35 @@ public class Genome
         }
         genome.MutationCount = MutationCount;
         genome.GenomeHistory = new List<Genome>(GenomeHistory);
+        genome.OpposingGenes = OpposingGenes;
         return genome;
     }
     
     private void HandleOpposingGenes()
     {
-        foreach (var (gene1, gene2) in OpposingGenes)
+        // Assuming OpposingGenes is now a List<Tuple<Type, Type>>
+        foreach (var (geneType1, geneType2) in OpposingGenes)
         {
-            // apply the deviation of gene1 on gene2, so gene2 mutations are ignored
-            gene2.HandleOpposingGene(gene1);
+            // Find genes of the specific types in the Genes list
+            var gene1 = Genes.FirstOrDefault(g => g.GetType() == geneType1);
+            var gene2 = Genes.FirstOrDefault(g => g.GetType() == geneType2);
+
+            if (gene1 != null && gene2 != null)
+            {
+                // Apply the deviation of gene1 on gene2, so gene2's mutations are in response to gene1
+                gene2.HandleOpposingGene(gene1);
+            }
         }
     }
+
     
-    public void AddOpposingGene<T>(T gene1, T gene2) where T : Gene
+    public void AddOpposingGene<T1, T2>() where T1 : Gene where T2 : Gene
     {
-        OpposingGenes.Add(new Tuple<Gene, Gene>(gene1, gene2));
+        Type geneType1 = typeof(T1);
+        Type geneType2 = typeof(T2);
+        OpposingGenes.Add(new Tuple<Type, Type>(geneType1, geneType2));
     }
+
     
     public void BuildDefaultGenome()
     {
@@ -137,11 +151,6 @@ public class Genome
             .WithSettings(genesSettings.GetGeneSettings<GeneProjectileCount>())
             .Build();
         Genes.Add(geneProjectileCount);
-        
-        GeneProjectileRange geneProjectileRange = GeneBuilder<GeneProjectileRange>.CreateGene()
-            .WithSettings(genesSettings.GetGeneSettings<GeneProjectileRange>())
-            .Build();
-        Genes.Add(geneProjectileRange);
         
         GeneProjectileSpeed geneProjectileSpeed = GeneBuilder<GeneProjectileSpeed>.CreateGene()
             .WithSettings(genesSettings.GetGeneSettings<GeneProjectileSpeed>())
@@ -179,12 +188,12 @@ public class Genome
         Genes.Add(geneProjectileLifespan);
         
         // PAIR OPPOSING GENES
-        AddOpposingGene<Gene>(geneSize, geneHealth);
-        AddOpposingGene<Gene>(geneAttackSpeed, genePrecision);
-        AddOpposingGene<Gene>(geneProjectileCount, geneProjectileRange);
-        AddOpposingGene<Gene>(geneProjectileSpeed, geneProjectileSize);
-        AddOpposingGene<Gene>(geneVisionRange, geneVisionWidth);
-        AddOpposingGene<Gene>(geneRotationSpeed, geneMovementSpeed);
+        AddOpposingGene<GeneSize, GeneHealth>();
+        AddOpposingGene<GeneAttackSpeed, GenePrecision>();
+        AddOpposingGene<GeneProjectileCount, GeneProjectileLifespan>();
+        AddOpposingGene<GeneProjectileSpeed, GeneProjectileSize>();
+        AddOpposingGene<GeneVisionRange, GeneVisionWidth>();
+        AddOpposingGene<GeneRotationSpeed, GeneMovementSpeed>();
     }
     
     public override string ToString()
@@ -194,6 +203,11 @@ public class Genome
         foreach (var gene in Genes)
         {
             result += gene + "\n";
+        }
+        result += $"Oppositions : \n";
+        foreach (var (gene1, gene2) in OpposingGenes)
+        {
+            result += $"{gene1.Name}<->{gene2.Name}\n";
         }
         return result;
     }

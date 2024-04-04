@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BestioleSettings: {fileID: 11400000, guid: 69aa77f3ddd73074c8ce51a6bfe61b1c, type: 2}
   PopulationGroupSize: 10
-  PopulationGroupCount: 1
+  PopulationGroupCount: 3
   MinSpawnRadius: 9.8
   MaxSpawnRadius: 11.91
   CurrentGeneration: 0
