@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Props
-  m_Shader: {fileID: -6465566751694194690, guid: 53cdbfae10db1864baab20b0620f8acb, type: 3}
+  m_Name: Back
+  m_Shader: {fileID: -6465566751694194690, guid: 83622bebc4f5f68448967064635918b9, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -80,7 +80,7 @@ Material:
     - _RippleWidth: 1.58
     - _Speed: 15
     - _TileSize: 4
-    - _Width: 1.48
+    - _Width: 0.06
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
