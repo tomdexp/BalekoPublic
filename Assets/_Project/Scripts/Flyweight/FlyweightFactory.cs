@@ -31,6 +31,11 @@ public class FlyweightFactory : MonoBehaviour
         return Instance.GetPoolForType(settings).Get();
     }
     
+    public static Flyweight Spawn(Flyweight flyweight)
+    {
+        return Instance.GetPoolForType(flyweight.Settings).Get();
+    }
+    
     public static void ReturnToPool(Flyweight flyweight)
     {
         Instance.GetPoolForType(flyweight.Settings).Release(flyweight);

@@ -32,6 +32,7 @@ public class Vision : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Fov = Mathf.Clamp(Fov, 0, 360);
         VisionLineRenderer();
         VisionDetection();
     }

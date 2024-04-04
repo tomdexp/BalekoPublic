@@ -20,3 +20,6 @@ MonoBehaviour:
   DefaultMaxHunger: 100
   DefaultVisionRange: 3
   DefaultVisionWidth: 128
+  DefaultAttackSpeed: 2
+  DefaultAttackAngle: 30
+  DefaultSize: 0.5

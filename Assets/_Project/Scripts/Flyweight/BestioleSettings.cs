@@ -10,6 +10,11 @@ public class BestioleSettings : FlyweightSettings
     public float DefaultMaxHunger;
     public float DefaultVisionRange = 3;
     public float DefaultVisionWidth = 128;
+    public float DefaultAttackSpeed = 2;
+    [Tooltip("Correspond to the GenePrecision")]
+    public float DefaultAttackAngle = 30;
+    public float DefaultSize = 1;
+    public int DefaultProjectileCount = 1;
 
     public override Flyweight Create()
     {

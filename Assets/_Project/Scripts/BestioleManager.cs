@@ -18,7 +18,17 @@ public class BestioleManager : MonoBehaviour
     public int MaxBestioleToReproducePerPopulation = 5;
     
     private Dictionary<int, List<Bestiole>> _bestiolesPerPopulation = new Dictionary<int, List<Bestiole>>();
-    
+    private Storm _storm;
+
+    private void Awake()
+    {
+        _storm = FindAnyObjectByType<Storm>();
+        if (_storm == null)
+        {
+            Debug.LogError("No Storm found in the scene");
+        }
+    }
+
     [Button(ButtonSizes.Large)]
     public void SpawnAllBestioles()
     {
@@ -33,7 +43,7 @@ public class BestioleManager : MonoBehaviour
    
     public IEnumerator StartLoopCoroutine()
     {
-        SpawnAllBestioles(); // Initial spawn
+        yield return SpawnAllBestiolesCoroutine();
 
         yield return new WaitForSeconds(3f);
         
@@ -50,16 +60,17 @@ public class BestioleManager : MonoBehaviour
             GenerateNewGeneration();
             
             // Respawn all Bestioles for the new generation
-            SpawnAllBestioles();
+            yield return RespawnAllBestiolesCoroutine();
 
             // Add a short delay before starting the next generation loop
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(3f);
         }
     }
 
 
     private IEnumerator SpawnAllBestiolesCoroutine()
     {
+        
         _bestiolesPerPopulation.Clear();
         // Spread the spawn over multiple frames
         for (int i = 0; i < PopulationGroupCount; i++)
@@ -81,6 +92,34 @@ public class BestioleManager : MonoBehaviour
                 flyweight.gameObject.transform.position = spawnPosition;
                 _bestiolesPerPopulation[i].Add(bestiole);
 
+                yield return null;
+            }
+        }
+    }
+    
+    private IEnumerator RespawnAllBestiolesCoroutine()
+    {
+        // Iterate through each population
+        foreach (var populationEntry in _bestiolesPerPopulation)
+        {
+            List<Bestiole> bestiolesInPopulation = populationEntry.Value;
+
+            // Iterate through each Bestiole in the population
+            for (int j = 0; j < bestiolesInPopulation.Count; j++)
+            {
+                // Generate a random angle between 0 and 360 degrees (in radians)
+                float angle = Random.Range(0, Mathf.PI * 2);
+
+                // Generate a random radius between MinSpawnRadius and MaxSpawnRadius
+                float radius = Random.Range(MinSpawnRadius, MaxSpawnRadius);
+
+                // Convert polar coordinates to Cartesian coordinates for the new position
+                Vector2 spawnPosition = new Vector3(radius * Mathf.Cos(angle), radius * Mathf.Sin(angle));
+
+                // Respawn the Bestiole at the new position
+                var bestiole = bestiolesInPopulation[j];
+                var flyweight = FlyweightFactory.Spawn(bestiole);
+                flyweight.transform.position = spawnPosition;
                 yield return null;
             }
         }

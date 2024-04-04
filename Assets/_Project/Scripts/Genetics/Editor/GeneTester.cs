@@ -31,7 +31,7 @@ public class GeneTesterEditorWindow : OdinEditorWindow
         GeneSize geneSize = GeneBuilder<GeneSize>.CreateGene().Build();
         parent1.Genes.Add(geneMovementSpeed);
         parent1.Genes.Add(geneSize);
-        parent1.AddOpposingGene<Gene>(geneMovementSpeed, geneSize); // this mean geneSpeed is dominant and we only take the mutation of geneSpeed into account
+        parent1.AddOpposingGene<GeneMovementSpeed, GeneSize>(); // this mean geneSpeed is dominant and we only take the mutation of geneSpeed into account
         
         Debug.Log("Beginning Mutation:");
         Debug.Log("Parent 1: \n" + parent1);
