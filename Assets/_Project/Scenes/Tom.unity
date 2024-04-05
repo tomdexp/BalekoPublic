@@ -2257,7 +2257,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44319361cd81f4c459f3639d2eaec7cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 0.1
+  VirtualCamera: {fileID: 698207108}
+  MoveSpeed: 0.1
+  ScrollSpeed: 1
 --- !u!4 &747163983
 Transform:
   m_ObjectHideFlags: 0
@@ -6752,6 +6754,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 542684935029616567, guid: d55a9ddf73223ce479066d0be06dbf45, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 86.7959
+      objectReference: {fileID: 0}
+    - target: {fileID: 542684935029616567, guid: d55a9ddf73223ce479066d0be06dbf45, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -195.03003
+      objectReference: {fileID: 0}
     - target: {fileID: 2978303540222570035, guid: d55a9ddf73223ce479066d0be06dbf45, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -6831,6 +6841,18 @@ PrefabInstance:
     - target: {fileID: 2978303540222570035, guid: d55a9ddf73223ce479066d0be06dbf45, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5791153361474682783, guid: d55a9ddf73223ce479066d0be06dbf45, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 86.7959
+      objectReference: {fileID: 0}
+    - target: {fileID: 5997638626223382958, guid: d55a9ddf73223ce479066d0be06dbf45, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 131.87012
+      objectReference: {fileID: 0}
+    - target: {fileID: 5997638626223382958, guid: d55a9ddf73223ce479066d0be06dbf45, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -44.78894
       objectReference: {fileID: 0}
     - target: {fileID: 8635977989121295995, guid: d55a9ddf73223ce479066d0be06dbf45, type: 3}
       propertyPath: m_Name

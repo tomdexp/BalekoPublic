@@ -666,6 +666,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bestiole: {fileID: 4408224179290954141}
   ProjectileSettings: {fileID: 11400000, guid: 35bcad9ee2704704c94b2ac9343d6b8b, type: 2}
+  AttackSpeed: 2
+  Timer: 0
+  Angle: 30
+  ProjectileCount: 1
 --- !u!114 &289868908695958191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -717,7 +721,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!60 &3858838791079219704
 PolygonCollider2D:
