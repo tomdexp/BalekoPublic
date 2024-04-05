@@ -22,8 +22,16 @@ public class MapGenerator : MonoBehaviour
     [Required]
     public GameObject MapObject;
 
-    [SerializeField, Required] private Storm _storm;
+    private Storm _storm;
 
+    private void Awake()
+    {
+        _storm = FindAnyObjectByType<Storm>();
+        if (_storm == null)
+        {
+            Debug.LogError("Storm object not found");
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
