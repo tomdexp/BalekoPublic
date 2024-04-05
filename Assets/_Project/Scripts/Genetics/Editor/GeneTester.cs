@@ -31,7 +31,7 @@ public class GeneTesterEditorWindow : OdinEditorWindow
         GeneSize geneSize = GeneBuilder<GeneSize>.CreateGene().Build();
         parent1.Genes.Add(geneMovementSpeed);
         parent1.Genes.Add(geneSize);
-        parent1.AddOpposingGene<Gene>(geneMovementSpeed, geneSize); // this mean geneSpeed is dominant and we only take the mutation of geneSpeed into account
+        parent1.AddOpposingGene<GeneMovementSpeed, GeneSize>(); // this mean geneSpeed is dominant and we only take the mutation of geneSpeed into account
         
         Debug.Log("Beginning Mutation:");
         Debug.Log("Parent 1: \n" + parent1);
@@ -51,5 +51,28 @@ public class GeneTesterEditorWindow : OdinEditorWindow
         genome.BuildDefaultGenome();
         
         Debug.Log("Default Genome: \n" + genome);
+    }
+    
+    [Button(ButtonSizes.Large, ButtonStyle.FoldoutButton)]
+    private void TestDefaultGenomeHistory(int mutationCount = 50)
+    {
+        var parent1 = new Genome();
+        parent1.BuildDefaultGenome();
+        
+        Debug.Log("Beginning Mutation:");
+        Debug.Log("Parent 1: \n" + parent1);
+        
+        for (var i = 0; i < mutationCount; i++)
+        {
+            parent1.Mutate();
+            Debug.Log("Parent 1: \n" + parent1);
+        }
+        
+        Debug.Log("Mutation Complete");
+
+        foreach (var genome in parent1.GenomeHistory)
+        {
+            Debug.Log("Genome: \n" + genome);
+        }
     }
 }

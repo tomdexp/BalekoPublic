@@ -33,8 +33,18 @@ public class Movement : MonoBehaviour
         _currentDirection = Vector3.zero;
         NoiseInfluence();
         StormInfluence();
-        //if (Bestiole.Hungerable.CurrentValue / Bestiole.Hungerable.MaxValue > 0.2f)
-        EnemyInfluence();
+        if (Bestiole.targetList.Count > 0 && Bestiole.collectableList.Count > 0)
+        {
+            if (Bestiole.Hungerable.CurrentValue / Bestiole.Hungerable.MaxValue > 0.2f)
+                EnemyInfluence();
+            else
+                FoodInfluence();
+        }
+        else if (Bestiole.targetList.Count > 0 && Bestiole.collectableList.Count == 0)
+            EnemyInfluence();
+        else if (Bestiole.targetList.Count == 0 && Bestiole.collectableList.Count > 0)
+            FoodInfluence();
+
         _rigidbody2D.velocity = _rigidbody2D.velocity * 0.999f * Time.fixedDeltaTime;
         _rigidbody2D.AddForce(_currentDirection);
 
@@ -57,8 +67,27 @@ public class Movement : MonoBehaviour
 
     void EnemyInfluence()
     {
-        //TODO WHEN ENEMY
-        //_currentDirection += ToEnemySpeed
+        if (Bestiole.targetList[0].gameObject.activeSelf)
+        {
+            if (Vector2.Distance(Bestiole.targetList[0].transform.position, Bestiole.transform.position) > Bestiole.Vision.VisionRange / 2)
+                _currentDirection = (Bestiole.targetList[0].transform.position - transform.position).normalized * Speed;
+            else _currentDirection = (Bestiole.targetList[0].transform.position - transform.position).normalized;
+        } else
+        {
+            Bestiole.targetList.Remove(Bestiole.targetList[0]);
+        }
+    }
+
+    void FoodInfluence()
+    {
+        if (Bestiole.collectableList[0].gameObject.activeSelf)
+        {
+            _currentDirection = (Bestiole.collectableList[0].transform.position - transform.position).normalized * Speed;
+        }
+        else
+        {
+            Bestiole.collectableList.Remove(Bestiole.collectableList[0]);
+        }
     }
 
     private void OnDrawGizmosSelected()

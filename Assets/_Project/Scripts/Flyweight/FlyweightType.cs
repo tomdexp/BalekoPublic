@@ -1,5 +1,6 @@
 ﻿public enum FlyweightType
 {
     Bestiole,
-    Projectile
+    Projectile,
+    Collectable
 }

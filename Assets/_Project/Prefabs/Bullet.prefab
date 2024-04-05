@@ -133,11 +133,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c06e88fbcd723d847b1e7b403a10a57c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Settings: {fileID: 0}
   Rigidbody: {fileID: 8423133607727821326}
+  Collider: {fileID: 7616509195406233507}
   _spriteRenderer: {fileID: 2333159851699378244}
+  Sender: {fileID: 0}
   Damage: 0
   Speed: 0
   Direction: {x: 0, y: 0}
+  Lifetime: 0
+  bulletCanBounce: 0
 --- !u!50 &8423133607727821326
 Rigidbody2D:
   serializedVersion: 4

@@ -8,10 +8,23 @@ public class BestioleSettings : FlyweightSettings
     public float DefaultRotationSpeed;
     public float DefaultMaxHealth;
     public float DefaultMaxHunger;
+    public float DefaultVisionRange = 3;
+    public float DefaultVisionWidth = 128;
+    public float DefaultAttackSpeed = 2;
+    [Tooltip("Correspond to the GenePrecision")]
+    public float DefaultAttackAngle = 30;
+    public float DefaultSize = 1;
+    public int DefaultProjectileCount = 1;
 
     public override Flyweight Create()
     {
-        var go = Instantiate(Prefab);
+        GameObject parent = GameObject.Find(Prefab.name + " Pool");
+        if (parent == null)
+        {
+            parent = new GameObject(Prefab.name + " Pool");
+        }
+        
+        var go = Instantiate(Prefab, parent.transform);
         go.SetActive(true);
         go.name = Prefab.name;
 

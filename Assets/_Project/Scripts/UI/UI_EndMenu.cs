@@ -8,6 +8,4 @@ public class UI_EndMenu : MonoBehaviour
     {
 
     }
-
-    
 }
