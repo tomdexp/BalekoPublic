@@ -40,14 +40,45 @@ public abstract class Gene
 
     public float GetValueDeviationPercentage()
     {
-        return (Value / (MaxValue - MinValue)) * 2.0f;
+        if (Value == 0) return 0;
+        if (Value < 0) // Negative value
+        {
+            if (MinValue == 0) return 0;
+            return -(Value / MinValue);
+        }
+        else
+        {
+            return Value / MaxValue;
+        }
+        //return (Value / (MaxValue - MinValue)) * 2.0f;
+    }
+    
+    public void SetValueFromDeviationPercentage(float deviationPercentage)
+    {
+        if (deviationPercentage == 0)
+        {
+            Value = 0;
+        }
+        else if (deviationPercentage < 0) // Negative deviation
+        {
+            Value = MinValue * -deviationPercentage;
+        }
+        else // Positive deviation
+        {
+            Value = MaxValue * deviationPercentage;
+        }
     }
     
     public void HandleOpposingGene(Gene otherGene)
     {
         var oppositeDeviation = -otherGene.GetValueDeviationPercentage();
-        Value = ((MaxValue - MinValue) * oppositeDeviation) / 2;
+        SetValueFromDeviationPercentage(oppositeDeviation);
         Clamp();
+        var diff = Mathf.Abs(GetValueDeviationPercentage() + otherGene.GetValueDeviationPercentage());
+        if (diff > 0.1f)
+        {
+            Debug.LogWarning($"Opposing genes are too far apart: {GetType().Name} and {otherGene.GetType().Name}");
+        }
     }
 
     public override string ToString()

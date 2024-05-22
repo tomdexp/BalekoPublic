@@ -24,11 +24,18 @@ public class MapGenerator : MonoBehaviour
 
     private Storm _storm;
 
+    private void Awake()
+    {
+        _storm = FindAnyObjectByType<Storm>();
+        if (_storm == null)
+        {
+            Debug.LogError("Storm object not found");
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        _storm = GameObject.FindFirstObjectByType<Storm>();
         GenerateMap();
     }
 

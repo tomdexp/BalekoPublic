@@ -307,7 +307,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e8293758a38d310489a38207d172b642, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -462,7 +462,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 8.58
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -545,6 +545,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 659448030974914121, guid: 3869954e74c8f1042962e6d5a7011cd3, type: 3}
+      propertyPath: _storm
+      value: 
+      objectReference: {fileID: 312842913}
     - target: {fileID: 659448030974914121, guid: 3869954e74c8f1042962e6d5a7011cd3, type: 3}
       propertyPath: MapObject
       value: 

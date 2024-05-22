@@ -187,7 +187,6 @@ public class BestioleManager : MonoBehaviour
 
                     // Clone and potentially mutate again for variation
                     var newGenome = genome.Clone();
-                    newGenome.Mutate(); // Optional: You might choose to mutate or not here for additional diversity
                     newGenomes.Add(newGenome);
                 }
             }

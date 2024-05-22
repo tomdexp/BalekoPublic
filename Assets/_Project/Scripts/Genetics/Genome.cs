@@ -39,9 +39,18 @@ public class Genome
     public void Mutate()
     {
         MutationCount++;
+        List<Type> gene2Types = new List<Type>();
+        foreach (var (geneType1, geneType2) in OpposingGenes)
+        {
+            gene2Types.Add(geneType2);
+        }
         foreach (var gene in Genes)
         {
-            gene.Mutate();
+            // don't mutate the gene if it's the opposing gene
+            if (!gene2Types.Contains(gene.GetType()))
+            {
+                gene.Mutate();
+            }
         }
         HandleOpposingGenes();
         SaveInHistory();
