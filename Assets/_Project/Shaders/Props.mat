@@ -74,11 +74,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _BackBrightness: 0.03
     - _CircleSpeed: 10
     - _EnableExternalAlpha: 0
+    - _GridBrightnesss: 1
     - _GridWidth: 0.15
     - _RippleWidth: 1.58
-    - _Speed: 15
+    - _Speed: 0.2
     - _TileSize: 4
     - _Width: 1.48
     m_Colors:

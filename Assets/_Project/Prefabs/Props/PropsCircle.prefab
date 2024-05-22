@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5364393891984424470}
   - component: {fileID: 8179898370601007928}
   - component: {fileID: 9038676702283969575}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PropsCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

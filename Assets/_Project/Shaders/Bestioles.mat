@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Back
-  m_Shader: {fileID: -6465566751694194690, guid: 83622bebc4f5f68448967064635918b9, type: 3}
+  m_Name: Bestioles
+  m_Shader: {fileID: -6465566751694194690, guid: 01b99badf55585e45987ce2b11bcc3f8, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -74,13 +74,15 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _BackBrightness: 4.88
     - _CircleSpeed: 10
     - _EnableExternalAlpha: 0
-    - _GridWidth: 0.15
+    - _GridBrightnesss: 0.001
+    - _GridWidth: 0.3
     - _RippleWidth: 1.58
-    - _Speed: 10
+    - _Speed: 1.11
     - _TileSize: 4
-    - _Width: 0.06
+    - _Width: 1.48
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}

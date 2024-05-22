@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
 
 public class Bullet : Flyweight
 {
@@ -19,6 +20,8 @@ public class Bullet : Flyweight
     public Vector2 Direction;
     public float Lifetime;
     public bool bulletCanBounce;
+    public LayerMask WallsLayerMask;
+
 
     public void SetupBullet(float damage, float speed, float size, float lifetime,Vector2 direction, Bestiole sender)
     {
@@ -58,6 +61,11 @@ public class Bullet : Flyweight
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if ((WallsLayerMask & (1 << collision.gameObject.layer)) != 0)
+        {
+            DestroyBullet();
+            return;
+        }
         if (collision.transform.parent == null) return;
         Bestiole bestiole = collision.transform.parent.GetComponent<Bestiole>();
         if (bestiole != null)

@@ -28,6 +28,7 @@ public class UI_BestioleManager : MonoBehaviour
 
     private void StartLoop()
     {
+        StartButton.gameObject.SetActive(false);
         _bestioleManager.StartLoop();
     }
 

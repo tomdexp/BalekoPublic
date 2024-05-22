@@ -125,7 +125,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: b31c161e76b34a84191ae733e3952593, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -666,6 +666,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bestiole: {fileID: 4408224179290954141}
   ProjectileSettings: {fileID: 11400000, guid: 35bcad9ee2704704c94b2ac9343d6b8b, type: 2}
+  AttackSpeed: 2
+  Timer: 0
+  Angle: 30
+  ProjectileCount: 1
 --- !u!114 &289868908695958191
 MonoBehaviour:
   m_ObjectHideFlags: 0

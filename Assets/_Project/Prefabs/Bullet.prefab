@@ -54,7 +54,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 552c46c5b1e4c0740b7aec8c9b383482, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -135,7 +135,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Settings: {fileID: 0}
   Rigidbody: {fileID: 8423133607727821326}
-  Collider: {fileID: 7616509195406233507}
   _spriteRenderer: {fileID: 2333159851699378244}
   Sender: {fileID: 0}
   Damage: 0
@@ -143,6 +142,9 @@ MonoBehaviour:
   Direction: {x: 0, y: 0}
   Lifetime: 0
   bulletCanBounce: 0
+  WallsLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!50 &8423133607727821326
 Rigidbody2D:
   serializedVersion: 4
