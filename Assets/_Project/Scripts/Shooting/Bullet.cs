@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using System.Diagnostics;
 
 public class Bullet : Flyweight
 {
@@ -53,16 +54,17 @@ public class Bullet : Flyweight
         {
             _spriteRenderer.transform.DOScale(0.3f, .1f).OnComplete(() =>
             {
-                transform.DOKill();
-                FlyweightFactory.ReturnToPool(this);
-            });
-        });
+            transform.DOKill();
+            FlyweightFactory.ReturnToPool(this);
+            }).SetUpdate(true);
+        }).SetUpdate(true);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if ((WallsLayerMask & (1 << collision.gameObject.layer)) != 0)
         {
+            UnityEngine.Debug.Log("11");
             DestroyBullet();
             return;
         }
